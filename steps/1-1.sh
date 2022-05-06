@@ -21,11 +21,6 @@ mkdir server
 # shellcheck disable=SC2164 # REMOVE THIS IN aggregate.sh 
 cd server
 echo "node_modules" >> .gitignore
-# ```
-
-# :large_orange_diamond: Action: 以下のコマンドを入力してください。
-
-# ```terminal: メイン
 npm init -yes
 npm install apollo-server graphql
 npm install --save-dev typescript ts-node-dev 
@@ -52,7 +47,7 @@ npm set-script server-start "ts-node-dev --watch schema.gql,data.json --respawn 
 
 # :white_check_mark: Result: 以下のようなApollo Studio Explorerの画面が表示されます。
 
-# ![image.png](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/75738/58dd6755-b37b-9f64-3047-a1a2e8e7b0b9.png)
+# ![2022-05-06_20h54_04.png](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/75738/4f58c6b3-6efe-f0de-28cd-012fdecb499b.png)
 
 # :large_orange_diamond: Action: "Query your server"ボタンを押してください
 
@@ -68,11 +63,13 @@ npm set-script server-start "ts-node-dev --watch schema.gql,data.json --respawn 
 # }
 # ```
 
-# :white_check_mark: Result: Stringのmock値である"Hello World"で埋められたレスポンスが得られます。
+# :white_check_mark: Result: GraphQLサーバーから以下のレスポンスが得られます。 
+
+# ![2022-05-06_20h23_16.png](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/75738/cf7b77e0-9f56-ee9f-d767-563213a7c442.png)
 
 # これでGraphQサーバーが動作することを確認できました。後からもう一度立ち上げるので、いったんGraphQLサーバーを停止しましょう。
 
-# :large_orange_diamond: Action: Ctrl+C
+# :large_orange_diamond: Action: Ctrl+Cでプロセスを終了してください。
 
 ### React クライアント側 セットアップ
 
@@ -97,7 +94,8 @@ npm set-script client-start "react-scripts start"
 # npm run client-start
 # ```
 
+# :white_check_mark: Result: 以下のように表示されればOKです
+
 # ![2022-05-06_20h00_38.png](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/75738/42c1d114-7b6b-2b4c-6116-3714b36b8e03.png)
 
-# :large_orange_diamond: Action: Ctrl+C
 
