@@ -44,4 +44,11 @@ git apply patches/2-header-component.patch
 
 # ![2022-05-07_14h15_01.png](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/75738/ade07545-cace-834a-9d22-bbc8d18c0442.png)
 
+### Apollo Clientの導入
+
+# :large_orange_diamond: Action: 以下のコマンドを入力してください。
+
+# ```terminal: メイン
+git apply patches/2-apollo-client.patch
+# ```
 
