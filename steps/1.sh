@@ -16,12 +16,11 @@ cd ../ || exit               # REMOVE THIS IN aggregate.sh - cd to the git repos
 # :large_orange_diamond: Action: 以下のコマンドを入力してください。
 
 # ```terminal: メイン
-# shellcheck disable=SC2164 # REMOVE THIS IN aggregate.sh 
 mkdir server
 # shellcheck disable=SC2164 # REMOVE THIS IN aggregate.sh 
 cd server
-echo "node_modules" >> .gitignore
 npm init -yes
+echo "node_modules" >> .gitignore
 npm install apollo-server graphql
 npm install --save-dev typescript ts-node-dev 
 npx tsc -init
@@ -34,6 +33,7 @@ npx tsc -init
 cd ../ 
 # # git applyはレポジトリのルートディレクトリから実行する必要があります。なぜならpatches/*.patchファイルはすべて、レポジトリのルートからの相対パスを指定しているためです。
 git apply patches/1-1.patch
+npm set-script server-start "ts-node-dev --watch schema.gql,data.json --respawn index.ts"
 # ```
 
 # :large_orange_diamond: Action: 以下のコマンドを入力してください。
@@ -41,7 +41,6 @@ git apply patches/1-1.patch
 # ```terminal: メイン
 # shellcheck disable=SC2164 # REMOVE THIS IN aggregate.sh
 cd server
-npm set-script server-start "ts-node-dev --watch schema.gql,data.json --respawn index.ts"
 # npm run server-start
 # ```
 

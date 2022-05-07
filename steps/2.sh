@@ -27,6 +27,6 @@ git apply patches/2-1.patch
 # :large_orange_diamond: Action: 以下のコマンドを入力してください。
 
 # ```terminal: メイン
-cd ../
+cd ../ # gitレポジトリのルートディレクトリに移動。
 git apply patches/2-2.patch
 # ```
