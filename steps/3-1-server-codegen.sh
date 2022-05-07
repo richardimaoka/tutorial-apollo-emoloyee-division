@@ -46,7 +46,7 @@ npm set-script server-generate "graphql-codegen --config codegen.yml --watch ./s
 # :large_orange_diamond: Action: 以下のコマンドを入力してください。
 
 # ```terminal: メイン
-npm run server-generate
+# npm run server-generate
 # ```
 
 # :white_check_mark: Result: `server/generated/graphql.ts` ファイルに型定義が自動生成されればOKです。
