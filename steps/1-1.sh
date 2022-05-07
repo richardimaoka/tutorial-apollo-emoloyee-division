@@ -29,14 +29,14 @@ npm install
 # しかし、以下のコマンドではなく `.patch` ファイルを利用する上記のコマンドをおすすめします。なぜなら、以下のコマンドは実行のたびにpackage.json内 `dependencies` `devDependencies` のバージョンが変わるからです。それは、バージョンの差異による動作の違いを引き起こす可能性があります。
 
 # ```terminal: メイン
-mkdir server
-# shellcheck disable=SC2164 # REMOVE THIS IN aggregate.sh 
-cd server
-npm init -yes
-echo "node_modules" >> .gitignore
-npm install apollo-server graphql
-npm install --save-dev typescript ts-node-dev 
-npx tsc -init
+# mkdir server
+# # shellcheck disable=SC2164 # REMOVE THIS IN aggregate.sh 
+# cd server
+# npm init -yes
+# echo "node_modules" >> .gitignore
+# npm install apollo-server graphql
+# npm install --save-dev typescript ts-node-dev 
+# npx tsc -init
 # ```
 
 # ---
@@ -50,7 +50,7 @@ npx tsc -init
 # ```terminal: メイン
 git apply -p1 ../patches/1-server-start.patch
 npm set-script server-start "ts-node-dev --watch schema.gql,data.json --respawn index.ts"
-npm run server-start
+# npm run server-start
 # ```
 
 # :large_orange_diamond: Action: ブラウザで http://localhost:4000/ を開いてください
@@ -77,35 +77,4 @@ npm run server-start
 
 # ![2022-05-06_20h23_16.png](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/75738/cf7b77e0-9f56-ee9f-d767-563213a7c442.png)
 
-# これでGraphQサーバーが動作することを確認できました。後からもう一度立ち上げるので、いったんGraphQLサーバーを停止しましょう。
-
-# :large_orange_diamond: Action: Ctrl+Cでプロセスを終了してください。
-
-### React クライアント側 セットアップ
-
-# 次に、Reactクライアントをセットアップします。
-
-# ![アートボード 2.png](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/75738/e58d21b4-2df8-cb25-4b63-dfaf12bb529c.png)
-
-# :large_orange_diamond: Action: 以下のコマンドを入力してください。
-
-# ```terminal: メイン
-cd ../ # gitレポジトリのルートディレクトリに移動
-npx --yes create-react-app client --template typescript
-# shellcheck disable=SC2164 # REMOVE THIS IN aggregate.sh
-cd client 
-npm install @apollo/client graphql
-npm set-script client-start "react-scripts start"
-# ```
-
-# :large_orange_diamond: Action: 以下のコマンドを入力してください。
-
-# ```terminal: メイン
-# npm run client-start
-# ```
-
-# :white_check_mark: Result: 以下のように表示されればOKです
-
-# ![2022-05-06_20h00_38.png](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/75738/42c1d114-7b6b-2b4c-6116-3714b36b8e03.png)
-
-
+# これでGraphQサーバーが動作することを確認できました。

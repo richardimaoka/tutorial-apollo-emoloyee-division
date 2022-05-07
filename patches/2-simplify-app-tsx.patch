@@ -1,0 +1,39 @@
+commit 3a5c7fbbb84f9ea81acb4f34e0c79944c7fbdab9
+Author: Richard Imaoka <richard.e.imaoka@gmail.com>
+Date:   Tue May 3 22:20:44 2022 +0900
+
+    s: empty App.tsx
+
+diff --git a/client/src/App.tsx b/client/src/App.tsx
+index a53698a..db00f63 100644
+--- a/client/src/App.tsx
++++ b/client/src/App.tsx
+@@ -1,26 +1,7 @@
+-import React from 'react';
+-import logo from './logo.svg';
+-import './App.css';
++import React from "react";
+ 
+ function App() {
+-  return (
+-    <div className="App">
+-      <header className="App-header">
+-        <img src={logo} className="App-logo" alt="logo" />
+-        <p>
+-          Edit <code>src/App.tsx</code> and save to reload.
+-        </p>
+-        <a
+-          className="App-link"
+-          href="https://reactjs.org"
+-          target="_blank"
+-          rel="noopener noreferrer"
+-        >
+-          Learn React
+-        </a>
+-      </header>
+-    </div>
+-  );
++  return <div>empty react application</div>;
+ }
+ 
+ export default App;

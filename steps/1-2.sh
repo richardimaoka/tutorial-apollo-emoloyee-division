@@ -9,7 +9,16 @@ cd ../ || exit               # REMOVE THIS IN aggregate.sh - cd to the git repos
 
 # ![アートボード 2.png](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/75738/e58d21b4-2df8-cb25-4b63-dfaf12bb529c.png)
 
-# :large_orange_diamond: Action: 以下のコマンドを入力してください。
+# :large_orange_diamond: Action: 新しいターミナルを開いて、以下のコマンドを入力してください。
+
+# ```terminal: メイン
+# gitレポジトリのルートディレクトリに移動
+# shellcheck disable=SC2164 # REMOVE THIS IN aggregate.sh
+cd "$(git rev-parse --show-toplevel)"
+git apply patches/1-client-init.patch
+# shellcheck disable=SC2164 # REMOVE THIS IN aggregate.sh
+cd client
+# ```
 
 # <details><summary>上記のコマンドはと同等のコマンドはこちら。</summary><div>
 
@@ -18,12 +27,14 @@ cd ../ || exit               # REMOVE THIS IN aggregate.sh - cd to the git repos
 # しかし、以下のコマンドではなく `.patch` ファイルを利用する上記のコマンドをおすすめします。なぜなら、以下のコマンドは実行のたびにpackage.json内 `dependencies` `devDependencies` のバージョンが変わるからです。それは、バージョンの差異による動作の違いを引き起こす可能性があります。
 
 # ```terminal: メイン
-cd ../ # gitレポジトリのルートディレクトリに移動
-npx --yes create-react-app client --template typescript
+# gitレポジトリのルートディレクトリに移動
 # shellcheck disable=SC2164 # REMOVE THIS IN aggregate.sh
-cd client 
-npm install @apollo/client graphql
-npx prettier --write .
+# cd "$(git rev-parse --show-toplevel)"
+# npx --yes create-react-app client --template typescript
+# # shellcheck disable=SC2164 # REMOVE THIS IN aggregate.sh
+# cd client 
+# npm install @apollo/client graphql
+# npx prettier --write .
 # ```
 
 # また、create-react-appが出力するファイル、たとえばApp.tsxなども今後変更される可能性があり、そうなるとこの先のチュートリアルで実行する `git apply`がエラーになる原因にもなります。

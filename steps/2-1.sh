@@ -3,19 +3,17 @@
 cd "$(dirname "$0")" || exit # REMOVE THIS IN aggregate.sh 
 cd ../ || exit               # REMOVE THIS IN aggregate.sh - cd to the git repository root
 
-## 2. React クライアント側でのGraphQL導入
+## 2. React クライアント更新
 
-### クライアント側にヘッダーコンテナを追加
+### クライアント側の単純化
 
-# create-react-appで作成した、Reactロゴがくるくる回る状態から見た目を変えていきましょう。今回のチュートリアルは社員録アプリケーションの想定なので、会社名を表すヘッダーコンテナを追加します。
-
-# まずはその準備として、App.tsxを単純化します。
+# 先程の手順で作成した、Reactロゴがくるくる回る状態では今後不要になるコードがいくぶん含まれています。そこで不要なコードを消去してReactクライアント側のコードを単純化しましょう。
 
 # :large_orange_diamond: Action: 以下のコマンドを入力してください。
 
 # ```terminal: メイン
-cd ../
-git apply patches/2-1.patch
+cd ../ # gitレポジトリのルートディレクトリに移動。
+git apply patches/2-simplify-app-tsx.patch
 # ```
 
 # :white_check_mark: Result: 以下のように表示されればOKです
