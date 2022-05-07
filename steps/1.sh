@@ -16,6 +16,19 @@ cd ../ || exit               # REMOVE THIS IN aggregate.sh - cd to the git repos
 # :large_orange_diamond: Action: 以下のコマンドを入力してください。
 
 # ```terminal: メイン
+git apply patches/1-1-server-init.patch
+# shellcheck disable=SC2164 # REMOVE THIS IN aggregate.sh
+cd server
+npm install
+# ```
+
+# <details><summary>上記のコマンドはと同等のコマンドはこちら。</summary><div>
+
+# 上記のコマンドは以下のコマンドの結果を一つの `.patch`ファイルにまとめたものです。
+
+# しかし、以下のコマンドではなく `.patch` ファイルを利用する上記のコマンドをおすすめします。なぜなら、以下のコマンドは実行のたびにpackage.json内 `dependencies` `devDependencies` のバージョンが変わるからです。それは、バージョンの差異による動作の違いを引き起こす可能性があります。
+
+# ```terminal: メイン
 mkdir server
 # shellcheck disable=SC2164 # REMOVE THIS IN aggregate.sh 
 cd server
@@ -26,23 +39,21 @@ npm install --save-dev typescript ts-node-dev
 npx tsc -init
 # ```
 
+# ---
+
+# </div></details>
+
+# 次にGraphQLサーバーを立ち上げるのに最低限必要なファイルを追加します。
+
 # :large_orange_diamond: Action: 以下のコマンドを入力してください。
 
 # ```terminal: メイン
-# # gitレポジトリのルートディレクトリに移動。
-cd ../ 
-# # git applyはレポジトリのルートディレクトリから実行する必要があります。なぜならpatches/*.patchファイルはすべて、レポジトリのルートからの相対パスを指定しているためです。
-git apply patches/1-1.patch
+git apply -p1 ../patches/1-2-server-start.patch
 npm set-script server-start "ts-node-dev --watch schema.gql,data.json --respawn index.ts"
+npm run server-start
 # ```
 
-# :large_orange_diamond: Action: 以下のコマンドを入力してください。
-
-# ```terminal: メイン
-# shellcheck disable=SC2164 # REMOVE THIS IN aggregate.sh
-cd server
-# npm run server-start
-# ```
+# :large_orange_diamond: Action: ブラウザで http://localhost:4000/ を開いてください
 
 # :white_check_mark: Result: 以下のようなApollo Studio Explorerの画面が表示されます。
 
