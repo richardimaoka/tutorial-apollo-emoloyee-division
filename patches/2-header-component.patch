@@ -1,0 +1,130 @@
+commit 5bd61d59fa13a6713fbcadc8e2ea8c1efc6cf87b
+Author: Richard Imaoka <richard.e.imaoka@gmail.com>
+Date:   Sat May 7 14:13:03 2022 +0900
+
+    header component
+
+diff --git a/client/src/App.test.tsx b/client/src/App.test.tsx
+index d76787e..5c61b53 100644
+--- a/client/src/App.test.tsx
++++ b/client/src/App.test.tsx
+@@ -1,6 +1,6 @@
+ import React from "react";
+ import { render, screen } from "@testing-library/react";
+-import App from "./App";
++import App from "./components/App";
+ 
+ test("renders learn react link", () => {
+   render(<App />);
+diff --git a/client/src/App.tsx b/client/src/App.tsx
+deleted file mode 100644
+index db00f63..0000000
+--- a/client/src/App.tsx
++++ /dev/null
+@@ -1,7 +0,0 @@
+-import React from "react";
+-
+-function App() {
+-  return <div>empty react application</div>;
+-}
+-
+-export default App;
+diff --git a/client/src/components/App.tsx b/client/src/components/App.tsx
+new file mode 100644
+index 0000000..291b82d
+--- /dev/null
++++ b/client/src/components/App.tsx
+@@ -0,0 +1,11 @@
++import { HeaderContainer } from "./header/HeaderContainer";
++
++function App() {
++  return (
++    <>
++      <HeaderContainer />
++    </>
++  );
++}
++
++export default App;
+diff --git a/client/src/components/header/HeaderContainer.tsx b/client/src/components/header/HeaderContainer.tsx
+new file mode 100644
+index 0000000..b8b08cb
+--- /dev/null
++++ b/client/src/components/header/HeaderContainer.tsx
+@@ -0,0 +1,63 @@
++export const HeaderContainer = () => {
++  return (
++    <header
++      style={{
++        backgroundColor: "#ffffff",
++        filter: "drop-shadow(6px 6px 6px #00000029)",
++      }}
++    >
++      <div
++        style={{
++          width: "1080px",
++          margin: "0 auto",
++        }}
++      >
++        <div
++          style={{
++            padding: "4px",
++          }}
++        >
++          <div>
++            <span
++              style={{
++                display: "inline-block",
++                color: "#f3f3f3",
++                fontFamily: "'Noto Sans JP', sans-serif",
++                fontSize: "28px",
++                fontWeight: 900,
++                backgroundColor: "#1470C3",
++                padding: "2px 4px",
++              }}
++            >
++              M
++            </span>
++            <span
++              style={{
++                display: "inline-block",
++                color: "#1470C3",
++                fontFamily: "'Noto Sans JP', sans-serif",
++                fontSize: "28px",
++                fontWeight: 900,
++              }}
++            >
++              ondrickson
++            </span>
++          </div>
++          <div style={{ marginTop: "-6px" }}>
++            <span
++              style={{
++                display: "inline-block",
++                color: "#1470C3",
++                fontFamily: "'Noto Sans JP', sans-serif",
++                fontSize: "8px",
++                fontWeight: 900,
++              }}
++            >
++              モンドリクソン・アンド・カンパニー・ジャパン株式会社
++            </span>
++          </div>
++        </div>
++      </div>
++    </header>
++  );
++};
+diff --git a/client/src/index.tsx b/client/src/index.tsx
+index ccbac81..2f3b8e9 100644
+--- a/client/src/index.tsx
++++ b/client/src/index.tsx
+@@ -1,7 +1,7 @@
+ import React from "react";
+ import ReactDOM from "react-dom/client";
+ import "./index.css";
+-import App from "./App";
++import App from "./components/App";
+ import reportWebVitals from "./reportWebVitals";
+ 
+ const root = ReactDOM.createRoot(

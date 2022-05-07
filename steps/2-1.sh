@@ -9,7 +9,7 @@ cd ../ || exit               # REMOVE THIS IN aggregate.sh - cd to the git repos
 
 # 先程の手順で作成した、Reactロゴがくるくる回る状態では今後不要になるコードがいくぶん含まれています。そこで不要なコードを消去してReactクライアント側のコードを単純化しましょう。
 
-# :large_orange_diamond: Action: 以下のコマンドを入力してください。
+# :large_orange_diamond: Action: 新しいターミナルを開いて、以下のコマンドを入力してください。
 
 # ```terminal: メイン
 cd ../ # gitレポジトリのルートディレクトリに移動。
@@ -25,6 +25,23 @@ git apply patches/2-simplify-app-tsx.patch
 # :large_orange_diamond: Action: 以下のコマンドを入力してください。
 
 # ```terminal: メイン
-cd ../ # gitレポジトリのルートディレクトリに移動。
-git apply patches/2-2.patch
+rm client/src/index.css
+rm client/public/index.html
+git apply patches/2-index-html-css.patch
 # ```
+
+### ヘッダーコンポーネントの追加
+
+# 次に、ヘッダーコンポーネントを追加します
+
+# :large_orange_diamond: Action: 以下のコマンドを入力してください。
+
+# ```terminal: メイン
+git apply patches/2-header-component.patch
+# ```
+
+# :white_check_mark: Result: 以下のように表示されればOKです
+
+# ![2022-05-07_14h15_01.png](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/75738/ade07545-cace-834a-9d22-bbc8d18c0442.png)
+
+
