@@ -32,8 +32,6 @@ git apply patches/2-index-html-css.patch
 
 ### ヘッダーコンポーネントの追加
 
-# 次に、ヘッダーコンポーネントを追加します
-
 # :large_orange_diamond: Action: 以下のコマンドを入力してください。
 
 # ```terminal: メイン
@@ -42,7 +40,7 @@ git apply patches/2-header-component.patch
 
 # :white_check_mark: Result: 以下のように表示されればOKです
 
-# ![2022-05-07_14h15_01.png](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/75738/ade07545-cace-834a-9d22-bbc8d18c0442.png)
+# ![2022-05-07_15h40_32.png](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/75738/680e1428-114e-96e5-bea8-452ec565415f.png)
 
 ### Apollo Clientの導入
 
