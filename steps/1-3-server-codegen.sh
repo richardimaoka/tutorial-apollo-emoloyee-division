@@ -16,8 +16,9 @@ cd ../ || exit               # REMOVE THIS IN aggregate.sh - cd to the git repos
 # :large_orange_diamond: Action: 以下のコマンドを入力してください。
 
 # ```terminal: メイン
-git apply patches//patches/3-server-codegen-install.patch
-git apply patches//patches/3-server-codegen-yml.patch
+# gitレポジトリのルートディレクトリに移動
+git apply patches/3-server-codegen-install.patch
+git apply patches/3-server-codegen-yml.patch
 # shellcheck disable=SC2164 # REMOVE THIS IN aggregate.sh
 cd server
 npm install
@@ -47,6 +48,7 @@ npm set-script server-generate "graphql-codegen --config codegen.yml --watch ./s
 
 # ```terminal: メイン
 # npm run server-generate
+
 # ```
 
 # :white_check_mark: Result: `server/generated/graphql.ts` ファイルに型定義が自動生成されればOKです。

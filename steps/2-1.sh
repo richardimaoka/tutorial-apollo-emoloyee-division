@@ -12,7 +12,9 @@ cd ../ || exit               # REMOVE THIS IN aggregate.sh - cd to the git repos
 # :large_orange_diamond: Action: 新しいターミナルを開いて、以下のコマンドを入力してください。
 
 # ```terminal: メイン
-cd ../ # gitレポジトリのルートディレクトリに移動。
+# gitレポジトリのルートディレクトリに移動
+# shellcheck disable=SC2164 # REMOVE THIS IN aggregate.sh
+cd "$(git rev-parse --show-toplevel)"
 git apply patches/2-simplify-app-tsx.patch
 # ```
 
