@@ -52,3 +52,4 @@ git apply patches/2-header-component.patch
 git apply patches/2-apollo-client.patch
 # ```
 
+# ここまででApollo Clientの導入はできましたが、GraphQLサーバーからデータを取得するには、サーバー側でスキーマを更新します。
