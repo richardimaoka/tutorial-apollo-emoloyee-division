@@ -16,7 +16,7 @@ cd ../ || exit               # REMOVE THIS IN aggregate.sh - cd to the git repos
 # :large_orange_diamond: Action: 以下のコマンドを入力してください。
 
 # ```terminal: メイン
-git apply patches/1-1-server-init.patch
+git apply patches/1-server-init.patch
 # shellcheck disable=SC2164 # REMOVE THIS IN aggregate.sh
 cd server
 npm install
@@ -48,7 +48,7 @@ npx tsc -init
 # :large_orange_diamond: Action: 以下のコマンドを入力してください。
 
 # ```terminal: メイン
-git apply -p1 ../patches/1-2-server-start.patch
+git apply -p1 ../patches/1-server-start.patch
 npm set-script server-start "ts-node-dev --watch schema.gql,data.json --respawn index.ts"
 npm run server-start
 # ```
