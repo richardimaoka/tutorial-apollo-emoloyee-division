@@ -3,15 +3,13 @@
 cd "$(dirname "$0")" || exit # REMOVE THIS IN aggregate.sh 
 cd ../ || exit               # REMOVE THIS IN aggregate.sh - cd to the git repository root
 
-## 3. クライアント・サーバー間の通信開始
+## 4. クライアント側codegenのセットアップ
 
-# ここからはクライアント・サーバー間の通信を始めましょう。まずはその前段階としてcodegen導入からです。
+# サーバー側だけではなく、クライアント側でもcodegnを使えば、自動生成された型定義で間違いを防げます。
 
-### サーバー側GraphQL codegen導入
+# :large_orange_diamond: Action: 新しいターミナルを立ち上げてください。
 
-# codegenによりGraphQLスキーマファイル schema.graphql からTypeScriptの型を自動生成できます。自分で手を動かして型を書くと、面倒な上に間違いも起こりやすいので、型が自動生成しましょう。
-
-# 実際に自動生成される型定義を見ると、どの部分の型を自分で書かなくて良くなるか一目瞭然なので、早速動かしていきましょう。
+# ![アートボード 5.png](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/75738/29870265-68f3-2a32-7c89-d0b930f42aba.png)
 
 # :large_orange_diamond: Action: 以下のコマンドを入力してください。
 
