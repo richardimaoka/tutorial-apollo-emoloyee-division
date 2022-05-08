@@ -18,57 +18,84 @@ node と npm がインストール済みであることを確認して下さい�
 
 :large_orange_diamond: Action: ターミナルで以下のコマンドを実行してください
 
-```terminal: メイン・ターミナル
+```terminal
 git clone https://github.com/richardimaoka/tutorial-apollo-employee-division.git
 cd tutorial-apollo-employee-division
 ```
 
-後ほど別のターミナルを立ち上げるので、このターミナルは `メイン` と表記します。
-1. 開発プロジェクトの初期設定
 
-このチュートリアルでは以下の画像のように、GraphQL サーバーと React クライアントという 2 つの主要なプロセスを立ち上げて開発していきます。
+## 3. クライアント・サーバー間の通信開始
 
-![アートボード 1.png](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/75738/d4c547fc-0cfc-19ff-ac0d-2accf5e5bd45.png)
+ここからはクライアント・サーバー間の通信を始めましょう。まずはその前段階としてcodegen導入からです。
 
-## GraphQL サーバー セットアップ
+### サーバー側GraphQL codegen導入
 
-まずは GraphQL サーバーをセットアップしていきましょう。
+codegenによりGraphQLスキーマファイル schema.graphql からTypeScriptの型を自動生成できます。自分で手を動かして型を書くと、面倒な上に間違いも起こりやすいので、型が自動生成しましょう。
 
+実際に自動生成される型定義を見ると、どの部分の型を自分で書かなくて良くなるか一目瞭然なので、早速動かしていきましょう。
 
 :large_orange_diamond: Action: 以下のコマンドを入力してください。
 
 ```terminal: メイン
-git apply patches/1-server-init.patch
+gitレポジトリのルートディレクトリに移動
+git apply patches/3-server-codegen-install.patch
+git apply patches/3-server-codegen-yml.patch
 cd server
 npm install
+npm set-script server-generate "graphql-codegen --config codegen.yml --watch ./schema.gql"
 ```
-<details><summary>上記のコマンドはと同等のコマンドはこちら。</summary><div>
+
+<details><summary>上記と同等のコマンドはこちら。</summary><div>
 
 上記のコマンドは以下のコマンドの結果を`.patch`ファイルにまとめたものです。
 
 しかし、以下のコマンドではなく `.patch` ファイルを利用する上記のコマンドをおすすめします。なぜなら、以下のコマンドでは実行のたびに結果が変わる可能性があり、この先のチュートリアルの手順でエラーを発生させてしまうかもしれないからです。
 
 ```terminal: メイン
-mkdir server
 cd server
-npm init -yes
-echo "node_modules" >> .gitignore
-npm install apollo-server graphql
-npm install --save-dev typescript ts-node-dev
-npx tsc -init
+npm install @graphql-codegen/cli
+npx graphql-codegen init
+# あとは対話式インターフェイスが立ち上がるので質問に答える
+# 必要に応じて適宜config.ymlを修正 https://www.graphql-code-generator.com/docs/config-reference/codegen-config
 ```
 
 ---
 
 </div></details>
-次に GraphQL サーバーを立ち上げるのに最低限必要なファイルを追加します。
-
 
 :large_orange_diamond: Action: 以下のコマンドを入力してください。
 
 ```terminal: メイン
-git apply -p1 ../patches/1-server-start.patch
-npm set-script server-start "ts-node-dev --watch schema.gql,data.json --respawn index.ts"
+npm run server-generate
+
+```
+
+:white_check_mark: Result: `server/generated/graphql.ts` ファイルに型定義が自動生成されればOKです。
+
+
+### クライアント側 codegen
+
+###
+
+npm install --save-dev @graphql-codegen/cli
+
+
+## 1. GraphQLサーバーのセットアップ
+
+このチュートリアルでは以下の画像のように、4つのプロセスを立ち上げます。まずはGraphQLサーバープロセスを立ち上げていきましょう。
+
+![アートボード 2.png](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/75738/6d1717b1-a470-89da-ef41-58670a898c23.png)
+
+まずは GraphQLサーバーをセットアップしていきましょう。
+
+:large_orange_diamond: Action: 以下のコマンドを入力してください。
+
+```terminal: GraphQLサーバー
+git apply patches/1-server-init.patch
+git apply patches/1-server-startup-files.patch
+git apply patches/1-server-set-script.patch
+cd server
+npm install
 npm run server-start
 ```
 
@@ -86,7 +113,7 @@ npm run server-start
 
 :large_orange_diamond: Action: 以下のクエリを Apollo Studio Explorer で入力して Run を押してください。
 
-```terminal: メイン
+```terminal
 {
   hello
 }
@@ -99,7 +126,37 @@ npm run server-start
 これで GraphQ サーバーが動作することを確認できました。
 
 
-### React クライアント側 セットアップ
+
+
+## 2. サーバー側GraphQL codegen導入
+
+![アートボード 3.png](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/75738/31eac510-efac-6ac5-8376-8b95b8758e2c.png)
+
+codegenによりGraphQLスキーマファイル schema.graphql からTypeScriptの型を自動生成できます。自分で手を動かして型を書くと、面倒な上に間違いも起こりやすいので、型が自動生成しましょう。
+
+実際に自動生成される型定義を見ると、どの部分の型を自分で書かなくて良くなるか一目瞭然なので、早速動かしていきましょう。
+
+:large_orange_diamond: Action: 新しいターミナルを立ち上げてください。
+
+:large_orange_diamond: Action: 以下のコマンドを入力してください。
+
+```terminal: サーバーcodegen
+# gitレポジトリのルートディレクトリに移動
+cd "$(git rev-parse --show-toplevel)"
+git apply patches/1-server-codegen-install.patch
+git apply patches/1-server-codegen-yml.patch
+git apply patches/1-server-codegen-set-script.patch
+cd server
+npm install
+npm run server-generate
+```
+
+:white_check_mark: Result: `server/generated/graphql.ts` ファイルに型定義が自動生成されればOKです。
+
+
+## 3. React クライアント側 セットアップ
+
+![アートボード 4.png](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/75738/a89cb30f-6c50-879c-737a-f601980a140d.png)
 
 次に、Reactクライアントをセットアップします。
 
@@ -113,25 +170,6 @@ cd "$(git rev-parse --show-toplevel)"
 git apply patches/1-client-init.patch
 cd client
 ```
-
-<details><summary>上記のコマンドはと同等のコマンドはこちら。</summary><div>
-
-上記のコマンドは以下のコマンドの結果を`.patch`ファイルにまとめたものです。
-
-しかし、以下のコマンドではなく `.patch` ファイルを利用する上記のコマンドをおすすめします。なぜなら、以下のコマンドでは実行のたびに結果が変わる可能性があり、この先のチュートリアルの手順でエラーを発生させてしまうかもしれないからです。
-
-```terminal: メイン
-gitレポジトリのルートディレクトリに移動
-cd "$(git rev-parse --show-toplevel)"
-npx --yes create-react-app client --template typescript
-cd client 
-npm install @apollo/client graphql
-npx prettier --write .
-```
-
----
-
-</div></details>
 
 :large_orange_diamond: Action: 以下のコマンドを入力してください。
 
@@ -156,7 +194,8 @@ npm run client-start
 :large_orange_diamond: Action: 新しいターミナルを開いて、以下のコマンドを入力してください。
 
 ```terminal: メイン
-cd ../ # gitレポジトリのルートディレクトリに移動。
+gitレポジトリのルートディレクトリに移動
+cd "$(git rev-parse --show-toplevel)"
 git apply patches/2-simplify-app-tsx.patch
 ```
 
@@ -197,58 +236,7 @@ git apply patches/2-apollo-client.patch
 ここまででApollo Clientの導入はできましたが、GraphQLサーバーからデータを取得するには、サーバー側でスキーマを更新します。
 
 
-## 3. クライアント・サーバー間の通信開始
-
-ここからはクライアント・サーバー間の通信を始めましょう。まずはその前段階としてcodegen導入からです。
-
-### サーバー側GraphQL codegen導入
-
-codegenによりGraphQLスキーマファイル schema.graphql からTypeScriptの型を自動生成できます。自分で手を動かして型を書くと、面倒な上に間違いも起こりやすいので、型が自動生成しましょう。
-
-実際に自動生成される型定義を見ると、どの部分の型を自分で書かなくて良くなるか一目瞭然なので、早速動かしていきましょう。
-
-:large_orange_diamond: Action: 以下のコマンドを入力してください。
-
-```terminal: メイン
-git apply patches//patches/3-server-codegen-install.patch
-git apply patches//patches/3-server-codegen-yml.patch
-cd server
-npm install
-npm set-script server-generate "graphql-codegen --config codegen.yml --watch ./schema.gql"
-```
-
-<details><summary>上記と同等のコマンドはこちら。</summary><div>
-
-上記のコマンドは以下のコマンドの結果を`.patch`ファイルにまとめたものです。
-
-しかし、以下のコマンドではなく `.patch` ファイルを利用する上記のコマンドをおすすめします。なぜなら、以下のコマンドでは実行のたびに結果が変わる可能性があり、この先のチュートリアルの手順でエラーを発生させてしまうかもしれないからです。
-
-```terminal: メイン
-cd server
-npm install @graphql-codegen/cli
-npx graphql-codegen init
-# あとは対話式インターフェイスが立ち上がるので質問に答える
-# 必要に応じて適宜config.ymlを修正 https://www.graphql-code-generator.com/docs/config-reference/codegen-config
-```
-
----
-
-</div></details>
-
-:large_orange_diamond: Action: 以下のコマンドを入力してください。
-
-```terminal: メイン
-npm run server-generate
-```
-
-:white_check_mark: Result: `server/generated/graphql.ts` ファイルに型定義が自動生成されればOKです。
-
-
 ### サーバー側 3部門 with fewer fields
-
-
-
-### クライアント側 codegen
 
 
 
