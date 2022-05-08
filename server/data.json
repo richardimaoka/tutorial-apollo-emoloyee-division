@@ -1,1 +1,14 @@
-{}
+[
+  {
+    "divisionName": "trading"
+  },
+  {
+    "divisionName": "sales"
+  },
+  {
+    "divisionName": "operations"
+  },
+  {
+    "divisionName": "accounting"
+  }
+]

@@ -1,3 +1,7 @@
 type Query {
-  hello: String
+  divisions: [Division]
+}
+
+type Division {
+  divisionName: String
 }

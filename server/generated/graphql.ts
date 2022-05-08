@@ -19,9 +19,14 @@ export type Scalars = {
   Float: number;
 };
 
+export type Division = {
+  __typename?: "Division";
+  divisionName: Maybe<Scalars["String"]>;
+};
+
 export type Query = {
   __typename?: "Query";
-  hello: Maybe<Scalars["String"]>;
+  divisions: Maybe<Array<Maybe<Division>>>;
 };
 
 export type ResolverTypeWrapper<T> = Promise<T> | T;
@@ -132,6 +137,7 @@ export type DirectiveResolverFn<
 /** Mapping between all available schema types and the resolvers types */
 export type ResolversTypes = {
   Boolean: ResolverTypeWrapper<Scalars["Boolean"]>;
+  Division: ResolverTypeWrapper<Division>;
   Query: ResolverTypeWrapper<{}>;
   String: ResolverTypeWrapper<Scalars["String"]>;
 };
@@ -139,17 +145,35 @@ export type ResolversTypes = {
 /** Mapping between all available schema types and the resolvers parents */
 export type ResolversParentTypes = {
   Boolean: Scalars["Boolean"];
+  Division: Division;
   Query: {};
   String: Scalars["String"];
+};
+
+export type DivisionResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["Division"] = ResolversParentTypes["Division"]
+> = {
+  divisionName: Resolver<
+    Maybe<ResolversTypes["String"]>,
+    ParentType,
+    ContextType
+  >;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type QueryResolvers<
   ContextType = any,
   ParentType extends ResolversParentTypes["Query"] = ResolversParentTypes["Query"]
 > = {
-  hello: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
+  divisions: Resolver<
+    Maybe<Array<Maybe<ResolversTypes["Division"]>>>,
+    ParentType,
+    ContextType
+  >;
 };
 
 export type Resolvers<ContextType = any> = {
+  Division: DivisionResolvers<ContextType>;
   Query: QueryResolvers<ContextType>;
 };
