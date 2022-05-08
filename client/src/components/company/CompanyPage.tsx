@@ -35,10 +35,19 @@ export const CompanyPage = (): JSX.Element => {
       <>
         <HeaderContainer />
         <main>
-          <div style={{ width: "1080px", margin: "0 auto" }}>
-            {nonNullList.map((x) => (
-              <DivisionCard key={x.divisionName} fragment={x} />
-            ))}
+          <div style={{ maxWidth: "1080px", margin: "0 auto" }}>
+            <div
+              style={{
+                display: "grid",
+                gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
+                padding: "8px",
+                gap: "10px",
+              }}
+            >
+              {nonNullList.map((x) => (
+                <DivisionCard key={x.divisionName} fragment={x} />
+              ))}
+            </div>
           </div>
         </main>
       </>
