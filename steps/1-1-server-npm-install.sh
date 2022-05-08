@@ -3,54 +3,26 @@
 cd "$(dirname "$0")" || exit # REMOVE THIS IN aggregate.sh 
 cd ../ || exit               # REMOVE THIS IN aggregate.sh - cd to the git repository root
 
-# # 1. 開発プロジェクトの初期設定
+# ## 1. 開発プロジェクトの初期設定
 
-# このチュートリアルでは以下の画像のように、GraphQL サーバーと React クライアントという 2 つの主要なプロセスを立ち上げて開発していきます。
+# このチュートリアルでは以下の画像のように、4つのプロセスを立ち上げます。まずはGraphQLサーバープロセスを立ち上げていきましょう。
 
-# ![アートボード 1.png](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/75738/d4c547fc-0cfc-19ff-ac0d-2accf5e5bd45.png)
+# ![アートボード 2.png](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/75738/6d1717b1-a470-89da-ef41-58670a898c23.png)
 
-# ## GraphQL サーバー セットアップ
+# ### GraphQLサーバーのセットアップ
 
-# まずは GraphQL サーバーをセットアップしていきましょう。
+# まずは GraphQLサーバーをセットアップしていきましょう。
 
 # :large_orange_diamond: Action: 以下のコマンドを入力してください。
 
-# ```terminal: メイン
+# ```terminal: GraphQLサーバー
 git apply patches/1-server-init.patch
+git apply patches/1-server-startup-files.patch
+git apply patches/1-server-set-script.patch
 # shellcheck disable=SC2164 # REMOVE THIS IN aggregate.sh
 cd server
 npm install
-# ```
-
-# <details><summary>上記のコマンドはと同等のコマンドはこちら。</summary><div>
-
-# 上記のコマンドは以下のコマンドの結果を`.patch`ファイルにまとめたものです。
-
-# しかし、以下のコマンドではなく `.patch` ファイルを利用する上記のコマンドをおすすめします。なぜなら、以下のコマンドでは実行のたびに結果が変わる可能性があり、この先のチュートリアルの手順でエラーを発生させてしまうかもしれないからです。
-
-# ```terminal: メイン
-# mkdir server
-# # shellcheck disable=SC2164 # REMOVE THIS IN aggregate.sh
-# cd server
-# npm init -yes
-# echo "node_modules" >> .gitignore
-# npm install apollo-server graphql
-# npm install --save-dev typescript ts-node-dev
-# npx tsc -init
-# ```
-
-# ---
-
-# </div></details>
-
-# 次に GraphQL サーバーを立ち上げるのに最低限必要なファイルを追加します。
-
-# :large_orange_diamond: Action: 以下のコマンドを入力してください。
-
-# ```terminal: メイン
-git apply -p1 ../patches/1-server-start.patch
-npm set-script server-start "ts-node-dev --watch schema.gql,data.json --respawn index.ts"
-# npm run server-start
+npm run server-start
 # ```
 
 # :large_orange_diamond: Action: ブラウザで http://localhost:4000/ を開いてください
@@ -67,7 +39,7 @@ npm set-script server-start "ts-node-dev --watch schema.gql,data.json --respawn 
 
 # :large_orange_diamond: Action: 以下のクエリを Apollo Studio Explorer で入力して Run を押してください。
 
-# ```terminal: メイン
+# ```terminal
 # {
 #   hello
 # }

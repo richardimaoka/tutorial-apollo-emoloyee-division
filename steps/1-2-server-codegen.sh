@@ -11,39 +11,17 @@ cd ../ || exit               # REMOVE THIS IN aggregate.sh - cd to the git repos
 
 # :large_orange_diamond: Action: 以下のコマンドを入力してください。
 
-# ```terminal: メイン
-# gitレポジトリのルートディレクトリに移動
-git apply patches/3-server-codegen-install.patch
-git apply patches/3-server-codegen-yml.patch
+# ```terminal: サーバーcodegen
+# # gitレポジトリのルートディレクトリに移動
 # shellcheck disable=SC2164 # REMOVE THIS IN aggregate.sh
+cd "$(git rev-parse --show-toplevel)"
+git apply patches/1-server-codegen-install.patch
+git apply patches/1-server-codegen-yml.patch
+git apply patches/1-server-codegen-set-script.patch
+# shellcheck disable=SC2164 # REMOVE THIS IN aggregate.sh
+cd server
 npm install
-npm set-script server-generate "graphql-codegen --config codegen.yml --watch ./schema.gql"
-# ```
-
-# <details><summary>上記と同等のコマンドはこちら。</summary><div>
-
-# 上記のコマンドは以下のコマンドの結果を`.patch`ファイルにまとめたものです。
-
-# しかし、以下のコマンドではなく `.patch` ファイルを利用する上記のコマンドをおすすめします。なぜなら、以下のコマンドでは実行のたびに結果が変わる可能性があり、この先のチュートリアルの手順でエラーを発生させてしまうかもしれないからです。
-
-# ```terminal: メイン
-# # shellcheck disable=SC2164 # REMOVE THIS IN aggregate.sh
-# cd server
-# npm install @graphql-codegen/cli
-# npx graphql-codegen init
-# # あとは対話式インターフェイスが立ち上がるので質問に答える
-# # 必要に応じて適宜config.ymlを修正 https://www.graphql-code-generator.com/docs/config-reference/codegen-config
-# ```
-
-# ---
-
-# </div></details>
-
-# :large_orange_diamond: Action: 以下のコマンドを入力してください。
-
-# ```terminal: メイン
 # npm run server-generate
-
 # ```
 
 # :white_check_mark: Result: `server/generated/graphql.ts` ファイルに型定義が自動生成されればOKです。
