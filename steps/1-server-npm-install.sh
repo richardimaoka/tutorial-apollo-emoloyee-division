@@ -3,13 +3,11 @@
 cd "$(dirname "$0")" || exit # REMOVE THIS IN aggregate.sh 
 cd ../ || exit               # REMOVE THIS IN aggregate.sh - cd to the git repository root
 
-# ## 1. 開発プロジェクトの初期設定
+# ## 1. GraphQLサーバーのセットアップ
 
 # このチュートリアルでは以下の画像のように、4つのプロセスを立ち上げます。まずはGraphQLサーバープロセスを立ち上げていきましょう。
 
 # ![アートボード 2.png](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/75738/6d1717b1-a470-89da-ef41-58670a898c23.png)
-
-# ### GraphQLサーバーのセットアップ
 
 # まずは GraphQLサーバーをセットアップしていきましょう。
 

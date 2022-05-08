@@ -3,7 +3,9 @@
 cd "$(dirname "$0")" || exit # REMOVE THIS IN aggregate.sh 
 cd ../ || exit               # REMOVE THIS IN aggregate.sh - cd to the git repository root
 
-### React クライアント側 セットアップ
+## 3. React クライアント側 セットアップ
+
+# ![アートボード 4.png](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/75738/a89cb30f-6c50-879c-737a-f601980a140d.png)
 
 # 次に、Reactクライアントをセットアップします。
 
@@ -15,31 +17,12 @@ cd ../ || exit               # REMOVE THIS IN aggregate.sh - cd to the git repos
 # gitレポジトリのルートディレクトリに移動
 # shellcheck disable=SC2164 # REMOVE THIS IN aggregate.sh
 cd "$(git rev-parse --show-toplevel)"
-git apply patches/1-client-init.patch
+git apply patches/3-create-react-app.patch
+git apply patches/3-prettier.patch
+git apply patches/3-set-script.patch
 # shellcheck disable=SC2164 # REMOVE THIS IN aggregate.sh
 cd client
 # ```
-
-# <details><summary>上記のコマンドはと同等のコマンドはこちら。</summary><div>
-
-# 上記のコマンドは以下のコマンドの結果を`.patch`ファイルにまとめたものです。
-
-# しかし、以下のコマンドではなく `.patch` ファイルを利用する上記のコマンドをおすすめします。なぜなら、以下のコマンドでは実行のたびに結果が変わる可能性があり、この先のチュートリアルの手順でエラーを発生させてしまうかもしれないからです。
-
-# ```terminal: メイン
-# gitレポジトリのルートディレクトリに移動
-# shellcheck disable=SC2164 # REMOVE THIS IN aggregate.sh
-# cd "$(git rev-parse --show-toplevel)"
-# npx --yes create-react-app client --template typescript
-# # shellcheck disable=SC2164 # REMOVE THIS IN aggregate.sh
-# cd client 
-# npm install @apollo/client graphql
-# npx prettier --write .
-# ```
-
-# ---
-
-# </div></details>
 
 # :large_orange_diamond: Action: 以下のコマンドを入力してください。
 
