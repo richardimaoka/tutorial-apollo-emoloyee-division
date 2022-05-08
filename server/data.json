@@ -26,5 +26,33 @@
     "divisionDisplayNameEn": "Accounting",
     "numDepartments": 13,
     "numMembers": 310
+  },
+  {
+    "divisionName": "risk",
+    "divisionDisplayName": "リスク管理部門",
+    "divisionDisplayNameEn": "Risk",
+    "numDepartments": 9,
+    "numMembers": 160
+  },
+  {
+    "divisionName": "legal",
+    "divisionDisplayName": "法務部門",
+    "divisionDisplayNameEn": "Legal",
+    "numDepartments": 1,
+    "numMembers": 32
+  },
+  {
+    "divisionName": "information-technology",
+    "divisionDisplayName": "IT部門",
+    "divisionDisplayNameEn": "IT",
+    "numDepartments": 25,
+    "numMembers": 880
+  },
+  {
+    "divisionName": "executive-office",
+    "divisionDisplayName": "社長室",
+    "divisionDisplayNameEn": "Executive Office",
+    "numDepartments": 1,
+    "numMembers": 14
   }
 ]
