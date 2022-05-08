@@ -6,11 +6,12 @@ export interface DivisionCardProps {
 }
 
 export const DivisionCard = ({ fragment }: DivisionCardProps): JSX.Element => {
-  return <div>{fragment.divisionName}</div>;
+  return <div>{fragment.divisionDisplayName}</div>;
 };
 
 DivisionCard.fragment = gql`
   fragment DivisionCard on Division {
     divisionName
+    divisionDisplayName
   }
 `;

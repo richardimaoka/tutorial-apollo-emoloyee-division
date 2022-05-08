@@ -23,6 +23,7 @@ export type Scalars = {
 
 export type Division = {
   __typename?: "Division";
+  divisionDisplayName: Maybe<Scalars["String"]>;
   divisionName: Maybe<Scalars["String"]>;
 };
 
@@ -38,17 +39,20 @@ export type GetDivisionsQuery = {
   divisions: Array<{
     __typename?: "Division";
     divisionName: string | null;
+    divisionDisplayName: string | null;
   } | null> | null;
 };
 
 export type DivisionCardFragment = {
   __typename?: "Division";
   divisionName: string | null;
+  divisionDisplayName: string | null;
 };
 
 export const DivisionCardFragmentDoc = gql`
   fragment DivisionCard on Division {
     divisionName
+    divisionDisplayName
   }
 `;
 export const GetDivisionsDocument = gql`

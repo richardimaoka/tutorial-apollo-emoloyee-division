@@ -1,14 +1,18 @@
 [
   {
-    "divisionName": "trading"
+    "divisionName": "trading",
+    "divisionDisplayName": "トレーディング部門"
   },
   {
-    "divisionName": "sales"
+    "divisionName": "sales",
+    "divisionDisplayName": "セールス部門"
   },
   {
-    "divisionName": "operations"
+    "divisionName": "operations",
+    "divisionDisplayName": "業務部門"
   },
   {
-    "divisionName": "accounting"
+    "divisionName": "accounting",
+    "divisionDisplayName": "会計部門"
   }
 ]
