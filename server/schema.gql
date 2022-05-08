@@ -5,6 +5,7 @@ type Query {
 type Division {
   divisionName: String
   divisionDisplayName: String
+  divisionDisplayNameEn: String
   numDepartments: Int
   numMembers: Int
 }

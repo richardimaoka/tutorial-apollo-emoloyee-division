@@ -40,6 +40,9 @@ export const DivisionCard = ({ fragment }: DivisionCardProps): JSX.Element => {
           borderRadius: "0px 0px 8px 8px",
           backgroundColor: "#ffffff",
           padding: "4px 16px",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "space-between",
         }}
       >
         <div>
@@ -63,6 +66,21 @@ export const DivisionCard = ({ fragment }: DivisionCardProps): JSX.Element => {
             {fragment.numMembers}人
           </span>
         </div>
+        <div>
+          <span
+            style={{
+              display: "inline-block",
+              width: "100%",
+              textAlign: "right",
+              fontFamily: "'Noto Sans JP', sans-serif",
+              fontSize: "28px",
+              fontWeight: "900",
+              color: "#1470C3",
+            }}
+          >
+            {fragment.divisionDisplayNameEn}
+          </span>
+        </div>
       </div>
     </div>
   );
@@ -72,6 +90,7 @@ DivisionCard.fragment = gql`
   fragment DivisionCard on Division {
     divisionName
     divisionDisplayName
+    divisionDisplayNameEn
     numDepartments
     numMembers
   }
