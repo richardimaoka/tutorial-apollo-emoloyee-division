@@ -11,7 +11,7 @@ cd ../ || exit               # REMOVE THIS IN aggregate.sh - cd to the git repos
 
 # :large_orange_diamond: Action: 新しいターミナルを開いて、以下のコマンドを入力してください。
 
-# ```terminal: メイン
+# ```terminal
 # gitレポジトリのルートディレクトリに移動
 # shellcheck disable=SC2164 # REMOVE THIS IN aggregate.sh
 cd "$(git rev-parse --show-toplevel)"
@@ -26,7 +26,7 @@ git apply patches/2-simplify-app-tsx.patch
 
 # :large_orange_diamond: Action: 以下のコマンドを入力してください。
 
-# ```terminal: メイン
+# ```terminal
 rm client/src/index.css
 rm client/public/index.html
 git apply patches/2-index-html-css.patch
@@ -36,7 +36,7 @@ git apply patches/2-index-html-css.patch
 
 # :large_orange_diamond: Action: 以下のコマンドを入力してください。
 
-# ```terminal: メイン
+# ```terminal
 git apply patches/2-header-component.patch
 # ```
 
@@ -48,7 +48,7 @@ git apply patches/2-header-component.patch
 
 # :large_orange_diamond: Action: 以下のコマンドを入力してください。
 
-# ```terminal: メイン
+# ```terminal
 git apply patches/2-apollo-client.patch
 # ```
 

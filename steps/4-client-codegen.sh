@@ -5,7 +5,7 @@ cd ../ || exit               # REMOVE THIS IN aggregate.sh - cd to the git repos
 
 ## 4. クライアント側codegenのセットアップ
 
-# サーバー側だけではなく、クライアント側でもcodegnを使えば、自動生成された型定義で間違いを防げます。
+# サーバー側だけではなく、クライアント側でもcodegnを使えば、自動生成された型定義で楽をできる上に、手書きをする場合と比べて型の書き間違いを防げます。
 
 # :large_orange_diamond: Action: 新しいターミナルを立ち上げてください。
 
@@ -13,40 +13,54 @@ cd ../ || exit               # REMOVE THIS IN aggregate.sh - cd to the git repos
 
 # :large_orange_diamond: Action: 以下のコマンドを入力してください。
 
-# ```terminal: メイン
-# gitレポジトリのルートディレクトリに移動
-git apply patches/3-server-codegen-install.patch
-git apply patches/3-server-codegen-yml.patch
+# ```terminal
+# # gitレポジトリのルートディレクトリに移動
 # shellcheck disable=SC2164 # REMOVE THIS IN aggregate.sh
-cd server
+cd "$(git rev-parse --show-toplevel)"
+git apply
+546870 npm install --save-dev @graphql-codegen/cli
+0a77aa2 npm install --save-dev @graphql-codegen/typescript @graphql-codegen/typescript-operations @graphql-codegen/typescript-react-apollo
+ff914c7 codegen.yml
+ff2266e npm set-script client-generate "graphql-codegen --config codegen.yml --watch src/**/*.tsx,../server/schema.gql"
+# shellcheck disable=SC2164 # REMOVE THIS IN aggregate.sh
+cd client
 npm install
-npm set-script server-generate "graphql-codegen --config codegen.yml --watch ./schema.gql"
 # ```
 
-# <details><summary>上記と同等のコマンドはこちら。</summary><div>
-
-# 上記のコマンドは以下のコマンドの結果を`.patch`ファイルにまとめたものです。
-
-# しかし、以下のコマンドではなく `.patch` ファイルを利用する上記のコマンドをおすすめします。なぜなら、以下のコマンドでは実行のたびに結果が変わる可能性があり、この先のチュートリアルの手順でエラーを発生させてしまうかもしれないからです。
-
-# ```terminal: メイン
-# # shellcheck disable=SC2164 # REMOVE THIS IN aggregate.sh
-# cd server
-# npm install @graphql-codegen/cli
-# npx graphql-codegen init
-# # あとは対話式インターフェイスが立ち上がるので質問に答える
-# # 必要に応じて適宜config.ymlを修正 https://www.graphql-code-generator.com/docs/config-reference/codegen-config
-# ```
-
-# ---
-
-# </div></details>
+# GraphQLスキーマが `hello: String` というフィールドしかない、その場しのぎのものだったので、これを更新します。
 
 # :large_orange_diamond: Action: 以下のコマンドを入力してください。
 
-# ```terminal: メイン
-# npm run server-generate
-
+# ```terminal
+cd ../
+git apply
+7bc6da2 server actual data 
 # ```
 
-# :white_check_mark: Result: `server/generated/graphql.ts` ファイルに型定義が自動生成されればOKです。
+# この状態ではまだ、クライアント側codegenを実行するとエラーが発生します。それを以下で確かめましょう。
+
+# :large_orange_diamond: Action: 以下のコマンドを入力してください。
+
+# ```terminal
+# npm run client-generate
+# ```
+
+# :white_check_mark: Result: エラーが発生します。
+
+# ```terminal
+# ERROR!!!
+# ```
+
+# :large_orange_diamond: Action: Ctrl + Cで一旦プロセスを停止してください。
+
+# 先程のエラーを解消するために、クライアント側で最初のGraphQLフラグメントを定義します。
+
+# :large_orange_diamond: Action: 以下のコマンドを入力してください。
+
+# ```terminal
+git apply
+319360d DivisionCard.tsx barebone to codegen type definitions
+# npm run client-generate
+# ```
+
+# :white_check_mark: Result: `client/generated/graphql.ts` ファイルに型定義が自動生成されればOKです。

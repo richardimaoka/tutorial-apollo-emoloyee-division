@@ -13,7 +13,7 @@ cd ../ || exit               # REMOVE THIS IN aggregate.sh - cd to the git repos
 
 # :large_orange_diamond: Action: 以下のコマンドを入力してください。
 
-# ```terminal: メイン
+# ```terminal
 # gitレポジトリのルートディレクトリに移動
 # shellcheck disable=SC2164 # REMOVE THIS IN aggregate.sh
 cd "$(git rev-parse --show-toplevel)"
