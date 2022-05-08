@@ -5,9 +5,9 @@ cd ../ || exit               # REMOVE THIS IN aggregate.sh - cd to the git repos
 
 ## 2. サーバー側GraphQL codegen導入
 
-# codegenによりGraphQLスキーマファイル schema.graphql からTypeScriptの型を自動生成できます。自分で手を動かして型を書くと、面倒な上に間違いも起こりやすいので、型が自動生成しましょう。
+# codegenによりGraphQLスキーマファイル schema.graphql からTypeScriptの型を自動生成できます。自分で手を動かして型を書くと、面倒な上に間違いも起こりやすいので、codegenで型を自動生成しましょう。
 
-# 実際に自動生成される型定義を見ると、どの部分の型を自分で書かなくて良くなるか一目瞭然なので、早速動かしていきましょう。
+# 実際に自動生成される型定義を見ると、どの部分の型を自分で書かなくて良くなるか一目瞭然です。早速動かしていきましょう。
 
 # :large_orange_diamond: Action: 新しいターミナルを立ち上げてください。
 
@@ -29,3 +29,5 @@ npm install
 # ```
 
 # :white_check_mark: Result: `server/generated/graphql.ts` ファイルに型定義が自動生成されればOKです。
+
+# このプロセスは立ち上げたままにしてください。

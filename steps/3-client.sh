@@ -47,17 +47,6 @@ d389589 simplify App.tsx
 
 # ![2022-05-06_21h29_54.png](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/75738/ff80a767-9298-5fa0-c66a-f02ad9efe2a7.png)
 
-# :large_orange_diamond: Action: 以下のコマンドを入力してください。
-
-# ```terminal
-git apply
-793c3bf Header Component
-# ```
-
-# :white_check_mark: Result: 以下のように表示されればOKです
-
-# ![2022-05-06_21h29_54.png](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/75738/ff80a767-9298-5fa0-c66a-f02ad9efe2a7.png)
-
 # 次に、ヘッダー部分を挿入します。
 
 # :large_orange_diamond: Action: 以下のコマンドを入力してください。
@@ -79,5 +68,7 @@ git apply
 git apply
 793c3bf Header Component
 # ```
+
+# このプロセスは立ち上げたままにしてください。
 
 # ここから先は、クライアント側でもGraphQLから自動生成されたTypeScript型定義を効かせてコーディングしていきます。そのために、codegenのセットアップを行いましょう。

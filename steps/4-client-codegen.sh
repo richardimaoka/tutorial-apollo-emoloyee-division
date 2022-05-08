@@ -64,3 +64,5 @@ git apply
 # ```
 
 # :white_check_mark: Result: `client/generated/graphql.ts` ファイルに型定義が自動生成されればOKです。
+
+# このプロセスは立ち上げたままにしてください。

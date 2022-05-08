@@ -14,9 +14,13 @@ cd ../ || exit               # REMOVE THIS IN aggregate.sh - cd to the git repos
 # :large_orange_diamond: Action: 以下のコマンドを入力してください。
 
 # ```terminal: GraphQLサーバー
-git apply patches/1-server-init.patch
-git apply patches/1-server-startup-files.patch
-git apply patches/1-server-set-script.patch
+git apply 
+201ea30 add .gitignore
+f482a1d npm init -yes
+b979ec5 npm install apollo-server graphql
+425a387 npm install --save-dev ts-node-dev typescript
+5847c01 npx tsc -init
+ac56d80 server necessary files to start
 # shellcheck disable=SC2164 # REMOVE THIS IN aggregate.sh
 cd server
 npm install
@@ -49,4 +53,4 @@ npm run server-start
 
 # これで GraphQ サーバーが動作することを確認できました。
 
-
+# このプロセスは立ち上げたままにしてください。
