@@ -1,7 +1,12 @@
 import { gql } from "@apollo/client";
+import { DivisionCardFragment } from "../../generated/graphql";
 
-export const DivisionCard = (): JSX.Element => {
-  return <div></div>;
+export interface DivisionCardProps {
+  fragment: DivisionCardFragment;
+}
+
+export const DivisionCard = ({ fragment }: DivisionCardProps): JSX.Element => {
+  return <div>{fragment.divisionName}</div>;
 };
 
 DivisionCard.fragment = gql`
