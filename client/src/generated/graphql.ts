@@ -1,16 +1,10 @@
-import { gql } from "@apollo/client";
-import * as Apollo from "@apollo/client";
+import { gql } from '@apollo/client';
+import * as Apollo from '@apollo/client';
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
-export type Exact<T extends { [key: string]: unknown }> = {
-  [K in keyof T]: T[K];
-};
-export type MakeOptional<T, K extends keyof T> = Omit<T, K> & {
-  [SubKey in K]?: Maybe<T[SubKey]>;
-};
-export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & {
-  [SubKey in K]: Maybe<T[SubKey]>;
-};
+export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
+export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
+export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
 const defaultOptions = {} as const;
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
@@ -22,47 +16,40 @@ export type Scalars = {
 };
 
 export type Division = {
-  __typename?: "Division";
-  divisionDisplayName: Maybe<Scalars["String"]>;
-  divisionName: Maybe<Scalars["String"]>;
+  __typename?: 'Division';
+  divisionDisplayName: Maybe<Scalars['String']>;
+  divisionName: Maybe<Scalars['String']>;
+  numDepartments: Maybe<Scalars['Int']>;
+  numMembers: Maybe<Scalars['Int']>;
 };
 
 export type Query = {
-  __typename?: "Query";
+  __typename?: 'Query';
   divisions: Maybe<Array<Maybe<Division>>>;
 };
 
-export type GetDivisionsQueryVariables = Exact<{ [key: string]: never }>;
+export type GetDivisionsQueryVariables = Exact<{ [key: string]: never; }>;
 
-export type GetDivisionsQuery = {
-  __typename?: "Query";
-  divisions: Array<{
-    __typename?: "Division";
-    divisionName: string | null;
-    divisionDisplayName: string | null;
-  } | null> | null;
-};
 
-export type DivisionCardFragment = {
-  __typename?: "Division";
-  divisionName: string | null;
-  divisionDisplayName: string | null;
-};
+export type GetDivisionsQuery = { __typename?: 'Query', divisions: Array<{ __typename?: 'Division', divisionName: string | null, divisionDisplayName: string | null, numDepartments: number | null, numMembers: number | null } | null> | null };
+
+export type DivisionCardFragment = { __typename?: 'Division', divisionName: string | null, divisionDisplayName: string | null, numDepartments: number | null, numMembers: number | null };
 
 export const DivisionCardFragmentDoc = gql`
-  fragment DivisionCard on Division {
-    divisionName
-    divisionDisplayName
-  }
-`;
+    fragment DivisionCard on Division {
+  divisionName
+  divisionDisplayName
+  numDepartments
+  numMembers
+}
+    `;
 export const GetDivisionsDocument = gql`
-  query GetDivisions {
-    divisions {
-      ...DivisionCard
-    }
+    query GetDivisions {
+  divisions {
+    ...DivisionCard
   }
-  ${DivisionCardFragmentDoc}
-`;
+}
+    ${DivisionCardFragmentDoc}`;
 
 /**
  * __useGetDivisionsQuery__
@@ -79,37 +66,14 @@ export const GetDivisionsDocument = gql`
  *   },
  * });
  */
-export function useGetDivisionsQuery(
-  baseOptions?: Apollo.QueryHookOptions<
-    GetDivisionsQuery,
-    GetDivisionsQueryVariables
-  >
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useQuery<GetDivisionsQuery, GetDivisionsQueryVariables>(
-    GetDivisionsDocument,
-    options
-  );
-}
-export function useGetDivisionsLazyQuery(
-  baseOptions?: Apollo.LazyQueryHookOptions<
-    GetDivisionsQuery,
-    GetDivisionsQueryVariables
-  >
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useLazyQuery<GetDivisionsQuery, GetDivisionsQueryVariables>(
-    GetDivisionsDocument,
-    options
-  );
-}
-export type GetDivisionsQueryHookResult = ReturnType<
-  typeof useGetDivisionsQuery
->;
-export type GetDivisionsLazyQueryHookResult = ReturnType<
-  typeof useGetDivisionsLazyQuery
->;
-export type GetDivisionsQueryResult = Apollo.QueryResult<
-  GetDivisionsQuery,
-  GetDivisionsQueryVariables
->;
+export function useGetDivisionsQuery(baseOptions?: Apollo.QueryHookOptions<GetDivisionsQuery, GetDivisionsQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetDivisionsQuery, GetDivisionsQueryVariables>(GetDivisionsDocument, options);
+      }
+export function useGetDivisionsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetDivisionsQuery, GetDivisionsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetDivisionsQuery, GetDivisionsQueryVariables>(GetDivisionsDocument, options);
+        }
+export type GetDivisionsQueryHookResult = ReturnType<typeof useGetDivisionsQuery>;
+export type GetDivisionsLazyQueryHookResult = ReturnType<typeof useGetDivisionsLazyQuery>;
+export type GetDivisionsQueryResult = Apollo.QueryResult<GetDivisionsQuery, GetDivisionsQueryVariables>;

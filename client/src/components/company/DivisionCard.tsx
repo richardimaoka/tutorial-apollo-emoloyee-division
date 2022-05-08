@@ -39,8 +39,31 @@ export const DivisionCard = ({ fragment }: DivisionCardProps): JSX.Element => {
           height: "130px",
           borderRadius: "0px 0px 8px 8px",
           backgroundColor: "#ffffff",
+          padding: "4px 16px",
         }}
-      ></div>
+      >
+        <div>
+          <span
+            style={{
+              color: "#474646",
+              fontFamily: "'Noto Sans JP', sans-serif",
+              fontSize: "14px",
+            }}
+          >
+            {fragment.numDepartments}部署
+          </span>
+          <span
+            style={{
+              color: "#474646",
+              fontFamily: "'Noto Sans JP', sans-serif",
+              fontSize: "14px",
+              marginLeft: "4px",
+            }}
+          >
+            {fragment.numMembers}人
+          </span>
+        </div>
+      </div>
     </div>
   );
 };
@@ -49,5 +72,7 @@ DivisionCard.fragment = gql`
   fragment DivisionCard on Division {
     divisionName
     divisionDisplayName
+    numDepartments
+    numMembers
   }
 `;

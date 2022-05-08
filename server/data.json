@@ -1,18 +1,26 @@
 [
   {
     "divisionName": "trading",
-    "divisionDisplayName": "トレーディング部門"
+    "divisionDisplayName": "トレーディング部門",
+    "numDepartments": 4,
+    "numMembers": 105
   },
   {
     "divisionName": "sales",
-    "divisionDisplayName": "セールス部門"
+    "divisionDisplayName": "セールス部門",
+    "numDepartments": 11,
+    "numMembers": 201
   },
   {
     "divisionName": "operations",
-    "divisionDisplayName": "業務部門"
+    "divisionDisplayName": "業務部門",
+    "numDepartments": 32,
+    "numMembers": 1005
   },
   {
     "divisionName": "accounting",
-    "divisionDisplayName": "会計部門"
+    "divisionDisplayName": "会計部門",
+    "numDepartments": 13,
+    "numMembers": 310
   }
 ]
