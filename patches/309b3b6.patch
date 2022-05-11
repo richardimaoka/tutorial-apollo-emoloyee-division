@@ -1,0 +1,57 @@
+commit 309b3b64561083baa7ec861b795b1df379b355aa
+Author: Richard Imaoka <richard.e.imaoka@gmail.com>
+Date:   Sun May 8 14:39:39 2022 +0900
+
+    make DivisionCard as cards visually
+
+diff --git a/client/src/components/company/CompanyPage.tsx b/client/src/components/company/CompanyPage.tsx
+index d61848c..272c344 100644
+--- a/client/src/components/company/CompanyPage.tsx
++++ b/client/src/components/company/CompanyPage.tsx
+@@ -35,10 +35,19 @@ export const CompanyPage = (): JSX.Element => {
+       <>
+         <HeaderContainer />
+         <main>
+-          <div style={{ width: "1080px", margin: "0 auto" }}>
+-            {nonNullList.map((x) => (
+-              <DivisionCard key={x.divisionName} fragment={x} />
+-            ))}
++          <div style={{ maxWidth: "1080px", margin: "0 auto" }}>
++            <div
++              style={{
++                display: "grid",
++                gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
++                padding: "8px",
++                gap: "10px",
++              }}
++            >
++              {nonNullList.map((x) => (
++                <DivisionCard key={x.divisionName} fragment={x} />
++              ))}
++            </div>
+           </div>
+         </main>
+       </>
+diff --git a/client/src/components/company/DivisionCard.tsx b/client/src/components/company/DivisionCard.tsx
+index 708ceb9..d344652 100644
+--- a/client/src/components/company/DivisionCard.tsx
++++ b/client/src/components/company/DivisionCard.tsx
+@@ -6,7 +6,17 @@ export interface DivisionCardProps {
+ }
+ 
+ export const DivisionCard = ({ fragment }: DivisionCardProps): JSX.Element => {
+-  return <div>{fragment.divisionDisplayName}</div>;
++  return (
++    <div
++      style={{
++        backgroundColor: "#ffffff",
++        height: "180px",
++        filter: "drop-shadow(6px 6px 6px #00000029)",
++      }}
++    >
++      {fragment.divisionDisplayName}
++    </div>
++  );
+ };
+ 
+ DivisionCard.fragment = gql`

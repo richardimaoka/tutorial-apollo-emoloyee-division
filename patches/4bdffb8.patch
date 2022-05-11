@@ -1,0 +1,94 @@
+commit 4bdffb8c52cf31f8b7bfab8bea8994c135a4449c
+Author: Richard Imaoka <richard.e.imaoka@gmail.com>
+Date:   Sun May 8 11:12:38 2022 +0900
+
+    Add divisionDisplayName
+
+diff --git a/client/src/components/company/DivisionCard.tsx b/client/src/components/company/DivisionCard.tsx
+index 05690af..708ceb9 100644
+--- a/client/src/components/company/DivisionCard.tsx
++++ b/client/src/components/company/DivisionCard.tsx
+@@ -6,11 +6,12 @@ export interface DivisionCardProps {
+ }
+ 
+ export const DivisionCard = ({ fragment }: DivisionCardProps): JSX.Element => {
+-  return <div>{fragment.divisionName}</div>;
++  return <div>{fragment.divisionDisplayName}</div>;
+ };
+ 
+ DivisionCard.fragment = gql`
+   fragment DivisionCard on Division {
+     divisionName
++    divisionDisplayName
+   }
+ `;
+diff --git a/client/src/generated/graphql.ts b/client/src/generated/graphql.ts
+index 302d39a..799c9eb 100644
+--- a/client/src/generated/graphql.ts
++++ b/client/src/generated/graphql.ts
+@@ -23,6 +23,7 @@ export type Scalars = {
+ 
+ export type Division = {
+   __typename?: "Division";
++  divisionDisplayName: Maybe<Scalars["String"]>;
+   divisionName: Maybe<Scalars["String"]>;
+ };
+ 
+@@ -38,17 +39,20 @@ export type GetDivisionsQuery = {
+   divisions: Array<{
+     __typename?: "Division";
+     divisionName: string | null;
++    divisionDisplayName: string | null;
+   } | null> | null;
+ };
+ 
+ export type DivisionCardFragment = {
+   __typename?: "Division";
+   divisionName: string | null;
++  divisionDisplayName: string | null;
+ };
+ 
+ export const DivisionCardFragmentDoc = gql`
+   fragment DivisionCard on Division {
+     divisionName
++    divisionDisplayName
+   }
+ `;
+ export const GetDivisionsDocument = gql`
+diff --git a/server/data.json b/server/data.json
+index 2dcedd6..c70f936 100644
+--- a/server/data.json
++++ b/server/data.json
+@@ -1,14 +1,18 @@
+ [
+   {
+-    "divisionName": "trading"
++    "divisionName": "trading",
++    "divisionDisplayName": "トレーディング部門"
+   },
+   {
+-    "divisionName": "sales"
++    "divisionName": "sales",
++    "divisionDisplayName": "セールス部門"
+   },
+   {
+-    "divisionName": "operations"
++    "divisionName": "operations",
++    "divisionDisplayName": "業務部門"
+   },
+   {
+-    "divisionName": "accounting"
++    "divisionName": "accounting",
++    "divisionDisplayName": "会計部門"
+   }
+ ]
+diff --git a/server/schema.gql b/server/schema.gql
+index a815823..965f45b 100644
+--- a/server/schema.gql
++++ b/server/schema.gql
+@@ -4,4 +4,5 @@ type Query {
+ 
+ type Division {
+   divisionName: String
++  divisionDisplayName: String
+ }

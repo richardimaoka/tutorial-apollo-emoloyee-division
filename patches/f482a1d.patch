@@ -1,0 +1,24 @@
+commit f482a1d9fff5316123cf05f415f4c6a218df0144
+Author: Richard Imaoka <richard.e.imaoka@gmail.com>
+Date:   Sun May 8 17:34:24 2022 +0900
+
+    npm init -yes
+
+diff --git a/server/package.json b/server/package.json
+new file mode 100644
+index 0000000..b25c8ae
+--- /dev/null
++++ b/server/package.json
+@@ -0,0 +1,12 @@
++{
++  "name": "server",
++  "version": "1.0.0",
++  "description": "",
++  "main": "index.js",
++  "scripts": {
++    "test": "echo \"Error: no test specified\" && exit 1"
++  },
++  "keywords": [],
++  "author": "",
++  "license": "ISC"
++}

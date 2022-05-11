@@ -1,0 +1,52 @@
+commit 0214b646cb1eb9bdfc048e4ddf99ba92b1d62991
+Author: Richard Imaoka <richard.e.imaoka@gmail.com>
+Date:   Sun May 8 14:53:03 2022 +0900
+
+    decorate DivisionCard title
+
+diff --git a/client/src/components/company/DivisionCard.tsx b/client/src/components/company/DivisionCard.tsx
+index d344652..3138417 100644
+--- a/client/src/components/company/DivisionCard.tsx
++++ b/client/src/components/company/DivisionCard.tsx
+@@ -9,12 +9,38 @@ export const DivisionCard = ({ fragment }: DivisionCardProps): JSX.Element => {
+   return (
+     <div
+       style={{
+-        backgroundColor: "#ffffff",
+-        height: "180px",
+         filter: "drop-shadow(6px 6px 6px #00000029)",
+       }}
+     >
+-      {fragment.divisionDisplayName}
++      <div
++        style={{
++          height: "50px",
++          borderRadius: "8px 8px 0px 0px",
++          backgroundColor: "#1470C3",
++          padding: "2px 8px",
++        }}
++      >
++        <span
++          style={{
++            color: "#f3f3f3",
++            fontFamily: "'Noto Sans JP', sans-serif",
++            fontSize: "28px",
++            fontWeight: "700",
++            lineHeight:
++              "50px" /* same as height of enclosing <div>: vertical centering */,
++          }}
++        >
++          {fragment.divisionDisplayName}
++        </span>
++      </div>
++      <div
++        //background
++        style={{
++          height: "130px",
++          borderRadius: "0px 0px 8px 8px",
++          backgroundColor: "#ffffff",
++        }}
++      ></div>
+     </div>
+   );
+ };

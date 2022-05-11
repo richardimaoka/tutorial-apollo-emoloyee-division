@@ -1,0 +1,25 @@
+commit bd67a1f25dbbd3fb22a23f181eaf89ef9c31e5db
+Author: Richard Imaoka <richard.e.imaoka@gmail.com>
+Date:   Sun May 8 10:41:40 2022 +0900
+
+    update DivisionCard.tsx to take generated DivisionCardFragment
+
+diff --git a/client/src/components/company/DivisionCard.tsx b/client/src/components/company/DivisionCard.tsx
+index 0ccd864..05690af 100644
+--- a/client/src/components/company/DivisionCard.tsx
++++ b/client/src/components/company/DivisionCard.tsx
+@@ -1,7 +1,12 @@
+ import { gql } from "@apollo/client";
++import { DivisionCardFragment } from "../../generated/graphql";
+ 
+-export const DivisionCard = (): JSX.Element => {
+-  return <div></div>;
++export interface DivisionCardProps {
++  fragment: DivisionCardFragment;
++}
++
++export const DivisionCard = ({ fragment }: DivisionCardProps): JSX.Element => {
++  return <div>{fragment.divisionName}</div>;
+ };
+ 
+ DivisionCard.fragment = gql`

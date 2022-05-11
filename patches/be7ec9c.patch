@@ -1,0 +1,243 @@
+commit be7ec9cdcfde6430e106b46db88b8a390ef8068b
+Author: Richard Imaoka <richard.e.imaoka@gmail.com>
+Date:   Sun May 8 15:15:32 2022 +0900
+
+    add numMembers and numDepartments
+
+diff --git a/client/src/components/company/DivisionCard.tsx b/client/src/components/company/DivisionCard.tsx
+index 3138417..965adc3 100644
+--- a/client/src/components/company/DivisionCard.tsx
++++ b/client/src/components/company/DivisionCard.tsx
+@@ -39,8 +39,31 @@ export const DivisionCard = ({ fragment }: DivisionCardProps): JSX.Element => {
+           height: "130px",
+           borderRadius: "0px 0px 8px 8px",
+           backgroundColor: "#ffffff",
++          padding: "4px 16px",
+         }}
+-      ></div>
++      >
++        <div>
++          <span
++            style={{
++              color: "#474646",
++              fontFamily: "'Noto Sans JP', sans-serif",
++              fontSize: "14px",
++            }}
++          >
++            {fragment.numDepartments}部署
++          </span>
++          <span
++            style={{
++              color: "#474646",
++              fontFamily: "'Noto Sans JP', sans-serif",
++              fontSize: "14px",
++              marginLeft: "4px",
++            }}
++          >
++            {fragment.numMembers}人
++          </span>
++        </div>
++      </div>
+     </div>
+   );
+ };
+@@ -49,5 +72,7 @@ DivisionCard.fragment = gql`
+   fragment DivisionCard on Division {
+     divisionName
+     divisionDisplayName
++    numDepartments
++    numMembers
+   }
+ `;
+diff --git a/client/src/generated/graphql.ts b/client/src/generated/graphql.ts
+index 799c9eb..113c435 100644
+--- a/client/src/generated/graphql.ts
++++ b/client/src/generated/graphql.ts
+@@ -1,16 +1,10 @@
+-import { gql } from "@apollo/client";
+-import * as Apollo from "@apollo/client";
++import { gql } from '@apollo/client';
++import * as Apollo from '@apollo/client';
+ export type Maybe<T> = T | null;
+ export type InputMaybe<T> = Maybe<T>;
+-export type Exact<T extends { [key: string]: unknown }> = {
+-  [K in keyof T]: T[K];
+-};
+-export type MakeOptional<T, K extends keyof T> = Omit<T, K> & {
+-  [SubKey in K]?: Maybe<T[SubKey]>;
+-};
+-export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & {
+-  [SubKey in K]: Maybe<T[SubKey]>;
+-};
++export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
++export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
++export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
+ const defaultOptions = {} as const;
+ /** All built-in and custom scalars, mapped to their actual values */
+ export type Scalars = {
+@@ -22,47 +16,40 @@ export type Scalars = {
+ };
+ 
+ export type Division = {
+-  __typename?: "Division";
+-  divisionDisplayName: Maybe<Scalars["String"]>;
+-  divisionName: Maybe<Scalars["String"]>;
++  __typename?: 'Division';
++  divisionDisplayName: Maybe<Scalars['String']>;
++  divisionName: Maybe<Scalars['String']>;
++  numDepartments: Maybe<Scalars['Int']>;
++  numMembers: Maybe<Scalars['Int']>;
+ };
+ 
+ export type Query = {
+-  __typename?: "Query";
++  __typename?: 'Query';
+   divisions: Maybe<Array<Maybe<Division>>>;
+ };
+ 
+-export type GetDivisionsQueryVariables = Exact<{ [key: string]: never }>;
++export type GetDivisionsQueryVariables = Exact<{ [key: string]: never; }>;
+ 
+-export type GetDivisionsQuery = {
+-  __typename?: "Query";
+-  divisions: Array<{
+-    __typename?: "Division";
+-    divisionName: string | null;
+-    divisionDisplayName: string | null;
+-  } | null> | null;
+-};
+ 
+-export type DivisionCardFragment = {
+-  __typename?: "Division";
+-  divisionName: string | null;
+-  divisionDisplayName: string | null;
+-};
++export type GetDivisionsQuery = { __typename?: 'Query', divisions: Array<{ __typename?: 'Division', divisionName: string | null, divisionDisplayName: string | null, numDepartments: number | null, numMembers: number | null } | null> | null };
++
++export type DivisionCardFragment = { __typename?: 'Division', divisionName: string | null, divisionDisplayName: string | null, numDepartments: number | null, numMembers: number | null };
+ 
+ export const DivisionCardFragmentDoc = gql`
+-  fragment DivisionCard on Division {
+-    divisionName
+-    divisionDisplayName
+-  }
+-`;
++    fragment DivisionCard on Division {
++  divisionName
++  divisionDisplayName
++  numDepartments
++  numMembers
++}
++    `;
+ export const GetDivisionsDocument = gql`
+-  query GetDivisions {
+-    divisions {
+-      ...DivisionCard
+-    }
++    query GetDivisions {
++  divisions {
++    ...DivisionCard
+   }
+-  ${DivisionCardFragmentDoc}
+-`;
++}
++    ${DivisionCardFragmentDoc}`;
+ 
+ /**
+  * __useGetDivisionsQuery__
+@@ -79,37 +66,14 @@ export const GetDivisionsDocument = gql`
+  *   },
+  * });
+  */
+-export function useGetDivisionsQuery(
+-  baseOptions?: Apollo.QueryHookOptions<
+-    GetDivisionsQuery,
+-    GetDivisionsQueryVariables
+-  >
+-) {
+-  const options = { ...defaultOptions, ...baseOptions };
+-  return Apollo.useQuery<GetDivisionsQuery, GetDivisionsQueryVariables>(
+-    GetDivisionsDocument,
+-    options
+-  );
+-}
+-export function useGetDivisionsLazyQuery(
+-  baseOptions?: Apollo.LazyQueryHookOptions<
+-    GetDivisionsQuery,
+-    GetDivisionsQueryVariables
+-  >
+-) {
+-  const options = { ...defaultOptions, ...baseOptions };
+-  return Apollo.useLazyQuery<GetDivisionsQuery, GetDivisionsQueryVariables>(
+-    GetDivisionsDocument,
+-    options
+-  );
+-}
+-export type GetDivisionsQueryHookResult = ReturnType<
+-  typeof useGetDivisionsQuery
+->;
+-export type GetDivisionsLazyQueryHookResult = ReturnType<
+-  typeof useGetDivisionsLazyQuery
+->;
+-export type GetDivisionsQueryResult = Apollo.QueryResult<
+-  GetDivisionsQuery,
+-  GetDivisionsQueryVariables
+->;
++export function useGetDivisionsQuery(baseOptions?: Apollo.QueryHookOptions<GetDivisionsQuery, GetDivisionsQueryVariables>) {
++        const options = {...defaultOptions, ...baseOptions}
++        return Apollo.useQuery<GetDivisionsQuery, GetDivisionsQueryVariables>(GetDivisionsDocument, options);
++      }
++export function useGetDivisionsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetDivisionsQuery, GetDivisionsQueryVariables>) {
++          const options = {...defaultOptions, ...baseOptions}
++          return Apollo.useLazyQuery<GetDivisionsQuery, GetDivisionsQueryVariables>(GetDivisionsDocument, options);
++        }
++export type GetDivisionsQueryHookResult = ReturnType<typeof useGetDivisionsQuery>;
++export type GetDivisionsLazyQueryHookResult = ReturnType<typeof useGetDivisionsLazyQuery>;
++export type GetDivisionsQueryResult = Apollo.QueryResult<GetDivisionsQuery, GetDivisionsQueryVariables>;
+\ No newline at end of file
+diff --git a/server/data.json b/server/data.json
+index c70f936..d38e7cb 100644
+--- a/server/data.json
++++ b/server/data.json
+@@ -1,18 +1,26 @@
+ [
+   {
+     "divisionName": "trading",
+-    "divisionDisplayName": "トレーディング部門"
++    "divisionDisplayName": "トレーディング部門",
++    "numDepartments": 4,
++    "numMembers": 105
+   },
+   {
+     "divisionName": "sales",
+-    "divisionDisplayName": "セールス部門"
++    "divisionDisplayName": "セールス部門",
++    "numDepartments": 11,
++    "numMembers": 201
+   },
+   {
+     "divisionName": "operations",
+-    "divisionDisplayName": "業務部門"
++    "divisionDisplayName": "業務部門",
++    "numDepartments": 32,
++    "numMembers": 1005
+   },
+   {
+     "divisionName": "accounting",
+-    "divisionDisplayName": "会計部門"
++    "divisionDisplayName": "会計部門",
++    "numDepartments": 13,
++    "numMembers": 310
+   }
+ ]
+diff --git a/server/schema.gql b/server/schema.gql
+index 965f45b..54ffd74 100644
+--- a/server/schema.gql
++++ b/server/schema.gql
+@@ -5,4 +5,6 @@ type Query {
+ type Division {
+   divisionName: String
+   divisionDisplayName: String
++  numDepartments: Int
++  numMembers: Int
+ }

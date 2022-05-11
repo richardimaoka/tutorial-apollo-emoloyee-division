@@ -1,0 +1,53 @@
+commit 02a50854701f54619a6d98d80d0c270c8517245b
+Author: Richard Imaoka <richard.e.imaoka@gmail.com>
+Date:   Sun May 8 10:41:19 2022 +0900
+
+    generated client/src/generated/grqphql.ts
+
+diff --git a/client/src/generated/graphql.ts b/client/src/generated/graphql.ts
+new file mode 100644
+index 0000000..0d725e7
+--- /dev/null
++++ b/client/src/generated/graphql.ts
+@@ -0,0 +1,41 @@
++import { gql } from "@apollo/client";
++export type Maybe<T> = T | null;
++export type InputMaybe<T> = Maybe<T>;
++export type Exact<T extends { [key: string]: unknown }> = {
++  [K in keyof T]: T[K];
++};
++export type MakeOptional<T, K extends keyof T> = Omit<T, K> & {
++  [SubKey in K]?: Maybe<T[SubKey]>;
++};
++export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & {
++  [SubKey in K]: Maybe<T[SubKey]>;
++};
++/** All built-in and custom scalars, mapped to their actual values */
++export type Scalars = {
++  ID: string;
++  String: string;
++  Boolean: boolean;
++  Int: number;
++  Float: number;
++};
++
++export type Division = {
++  __typename?: "Division";
++  divisionName: Maybe<Scalars["String"]>;
++};
++
++export type Query = {
++  __typename?: "Query";
++  divisions: Maybe<Array<Maybe<Division>>>;
++};
++
++export type DivisionCardFragment = {
++  __typename?: "Division";
++  divisionName: string | null;
++};
++
++export const DivisionCardFragmentDoc = gql`
++  fragment DivisionCard on Division {
++    divisionName
++  }
++`;

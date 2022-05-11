@@ -1,0 +1,13 @@
+commit 201ea30d0ced8c3599bbf2644a96dd93c6693d51
+Author: Richard Imaoka <richard.e.imaoka@gmail.com>
+Date:   Sun May 8 17:29:13 2022 +0900
+
+    add .gitignore
+
+diff --git a/server/.gitignore b/server/.gitignore
+new file mode 100644
+index 0000000..3c3629e
+--- /dev/null
++++ b/server/.gitignore
+@@ -0,0 +1 @@
++node_modules

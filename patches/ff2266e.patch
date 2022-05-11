@@ -1,0 +1,20 @@
+commit ff2266ecfe54637b17db02fbff0494673f862ab5
+Author: Richard Imaoka <richard.e.imaoka@gmail.com>
+Date:   Sun May 8 09:20:36 2022 +0900
+
+    npm set-script client-generate "graphql-codegen --config codegen.yml --watch src/**/*.tsx,../server/schema.gql"
+
+diff --git a/client/package.json b/client/package.json
+index 56d38bb..994a23b 100644
+--- a/client/package.json
++++ b/client/package.json
+@@ -23,7 +23,8 @@
+     "build": "react-scripts build",
+     "test": "react-scripts test",
+     "eject": "react-scripts eject",
+-    "client-start": "react-scripts start"
++    "client-start": "react-scripts start",
++    "client-generate": "graphql-codegen --config codegen.yml --watch src/**/*.tsx,../server/schema.gql"
+   },
+   "eslintConfig": {
+     "extends": [

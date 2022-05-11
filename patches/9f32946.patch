@@ -1,0 +1,20 @@
+commit 9f3294696195c1d9b2cc2f362ebf2ad832163d11
+Author: Richard Imaoka <richard.e.imaoka@gmail.com>
+Date:   Sun May 8 08:56:37 2022 +0900
+
+    npm set-script client-start "react-scripts start"
+
+diff --git a/client/package.json b/client/package.json
+index 1f20d07..f9ef227 100644
+--- a/client/package.json
++++ b/client/package.json
+@@ -22,7 +22,8 @@
+     "start": "react-scripts start",
+     "build": "react-scripts build",
+     "test": "react-scripts test",
+-    "eject": "react-scripts eject"
++    "eject": "react-scripts eject",
++    "client-start": "react-scripts start"
+   },
+   "eslintConfig": {
+     "extends": [

@@ -1,0 +1,23 @@
+commit 319360d1956de4fba6f981640e935d4b7939b22c
+Author: Richard Imaoka <richard.e.imaoka@gmail.com>
+Date:   Sun May 8 10:23:57 2022 +0900
+
+    DivisionCard.tsx barebone to codegen type definitions
+
+diff --git a/client/src/components/company/DivisionCard.tsx b/client/src/components/company/DivisionCard.tsx
+new file mode 100644
+index 0000000..0ccd864
+--- /dev/null
++++ b/client/src/components/company/DivisionCard.tsx
+@@ -0,0 +1,11 @@
++import { gql } from "@apollo/client";
++
++export const DivisionCard = (): JSX.Element => {
++  return <div></div>;
++};
++
++DivisionCard.fragment = gql`
++  fragment DivisionCard on Division {
++    divisionName
++  }
++`;

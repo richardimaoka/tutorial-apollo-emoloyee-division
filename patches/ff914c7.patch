@@ -1,0 +1,26 @@
+commit ff914c75ae4e3d1256d21defe26898248129b285
+Author: Richard Imaoka <richard.e.imaoka@gmail.com>
+Date:   Sun May 8 08:59:12 2022 +0900
+
+    codegen.yml
+
+diff --git a/client/codegen.yml b/client/codegen.yml
+new file mode 100644
+index 0000000..8401118
+--- /dev/null
++++ b/client/codegen.yml
+@@ -0,0 +1,14 @@
++overwrite: true
++schema: ../server/schema.gql
++documents: "src/**/*.tsx"
++generates:
++  src/generated/graphql.ts:
++    plugins:
++      - "typescript"
++      - "typescript-operations"
++      - "typescript-react-apollo"
++    config:
++      avoidOptionals: true
++hooks:
++  afterOneFileWrite:
++    - npx prettier --write
