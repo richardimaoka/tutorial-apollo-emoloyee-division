@@ -14,13 +14,12 @@ cd ../ || exit               # REMOVE THIS IN aggregate.sh - cd to the git repos
 # :large_orange_diamond: Action: 以下のコマンドを入力してください。
 
 # ```terminal: GraphQLサーバー
-git apply 
-201ea30 add .gitignore
-f482a1d npm init -yes
-b979ec5 npm install apollo-server graphql
-425a387 npm install --save-dev ts-node-dev typescript
-5847c01 npx tsc -init
-ac56d80 server necessary files to start
+git apply patches/201ea30.patch
+git apply patches/f482a1d.patch
+git apply patches/b979ec5.patch
+git apply patches/425a387.patch
+git apply patches/5847c01.patch
+git apply patches/ac56d80.patch
 # shellcheck disable=SC2164 # REMOVE THIS IN aggregate.sh
 cd server
 npm install
