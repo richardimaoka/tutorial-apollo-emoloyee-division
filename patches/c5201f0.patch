@@ -1,18 +1,17 @@
-commit 3a5c7fbbb84f9ea81acb4f34e0c79944c7fbdab9
+commit c5201f0e04dba9a78ed8ce92391f07ab4e458227
 Author: Richard Imaoka <richard.e.imaoka@gmail.com>
-Date:   Tue May 3 22:20:44 2022 +0900
+Date:   Sun May 8 09:51:21 2022 +0900
 
-    s: empty App.tsx
+    simplify App.tsx
 
 diff --git a/client/src/App.tsx b/client/src/App.tsx
-index a53698a..db00f63 100644
+index 9cc63d9..db00f63 100644
 --- a/client/src/App.tsx
 +++ b/client/src/App.tsx
 @@ -1,26 +1,7 @@
--import React from "react";
+ import React from "react";
 -import logo from "./logo.svg";
 -import "./App.css";
-+import React from "react";
  
  function App() {
 -  return (

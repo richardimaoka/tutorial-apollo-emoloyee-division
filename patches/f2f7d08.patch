@@ -1,8 +1,8 @@
-commit 5bd61d59fa13a6713fbcadc8e2ea8c1efc6cf87b
+commit f2f7d081b9f004fc7a2e7390911ff586867fb9b5
 Author: Richard Imaoka <richard.e.imaoka@gmail.com>
-Date:   Sat May 7 14:13:03 2022 +0900
+Date:   Sun May 8 09:52:35 2022 +0900
 
-    header component
+    Header Component
 
 diff --git a/client/src/App.test.tsx b/client/src/App.test.tsx
 index d76787e..5c61b53 100644
@@ -48,7 +48,7 @@ index 0000000..291b82d
 +export default App;
 diff --git a/client/src/components/header/HeaderContainer.tsx b/client/src/components/header/HeaderContainer.tsx
 new file mode 100644
-index 0000000..b8b08cb
+index 0000000..a373a3d
 --- /dev/null
 +++ b/client/src/components/header/HeaderContainer.tsx
 @@ -0,0 +1,63 @@
@@ -62,13 +62,13 @@ index 0000000..b8b08cb
 +    >
 +      <div
 +        style={{
-+          width: "1080px",
++          maxWidth: "1080px",
 +          margin: "0 auto",
 +        }}
 +      >
 +        <div
 +          style={{
-+            padding: "4px",
++            padding: "4px 8px",
 +          }}
 +        >
 +          <div>

@@ -1,8 +1,8 @@
-commit a253fa6ca3c7aae1958b1d51147307921f22f0d0
+commit a1d6ca94b6e620b72a6893be146dda2b64415bc0
 Author: Richard Imaoka <richard.e.imaoka@gmail.com>
-Date:   Tue May 3 23:26:59 2022 +0900
+Date:   Sun May 8 09:53:23 2022 +0900
 
-    s: introduce ApolloClient
+    Add ApolloClient to App.tsx
 
 diff --git a/client/src/components/App.tsx b/client/src/components/App.tsx
 index 291b82d..7fb54b0 100644
