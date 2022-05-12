@@ -9,7 +9,7 @@ cd ../ || exit               # REMOVE THIS IN aggregate.sh - cd to the git repos
 
 # :large_orange_diamond: Action: 新しいターミナルを立ち上げてください。
 
-# ![アートボード 5.png](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/75738/29870265-68f3-2a32-7c89-d0b930f42aba.png)
+# ![アートボード 4.png](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/75738/6fbd7901-ca6b-ed1a-da43-26ebc7ce16cd.png)
 
 # :large_orange_diamond: Action: 以下のコマンドを入力してください。
 
@@ -17,14 +17,10 @@ cd ../ || exit               # REMOVE THIS IN aggregate.sh - cd to the git repos
 # # gitレポジトリのルートディレクトリに移動
 # shellcheck disable=SC2164 # REMOVE THIS IN aggregate.sh
 cd "$(git rev-parse --show-toplevel)"
-git apply
-546870 npm install --save-dev @graphql-codegen/cli
-0a77aa2 npm install --save-dev @graphql-codegen/typescript @graphql-codegen/typescript-operations @graphql-codegen/typescript-react-apollo
-ff914c7 codegen.yml
-ff2266e npm set-script client-generate "graphql-codegen --config codegen.yml --watch src/**/*.tsx,../server/schema.gql"
-# shellcheck disable=SC2164 # REMOVE THIS IN aggregate.sh
-cd client
-npm install
+git apply patches/6dae1d9.patch
+git apply patches/0cdd81d.patch
+git apply patches/56bb5dc.patch
+git apply patches/db72e9f.patch
 # ```
 
 # GraphQLスキーマが `hello: String` というフィールドしかない、その場しのぎのものだったので、これを更新します。
@@ -32,9 +28,7 @@ npm install
 # :large_orange_diamond: Action: 以下のコマンドを入力してください。
 
 # ```terminal
-cd ../
-git apply
-7bc6da2 server actual data 
+git apply patches/f28d1c1.patch
 # ```
 
 # この状態ではまだ、クライアント側codegenを実行するとエラーが発生します。それを以下で確かめましょう。
@@ -42,27 +36,40 @@ git apply
 # :large_orange_diamond: Action: 以下のコマンドを入力してください。
 
 # ```terminal
+# shellcheck disable=SC2164 # REMOVE THIS IN aggregate.sh
+cd client
+npm install
+npm run client-codegen 
 # npm run client-generate
 # ```
 
 # :white_check_mark: Result: エラーが発生します。
 
 # ```terminal
-# ERROR!!!
+#  Found 1 error
+#
+#   ✖ src/generated/graphql.ts
+#     Error: 
+#           Unable to find any GraphQL type definitions for the following pointers:
+#        
+#               - src/**/*.tsx
 # ```
 
-# :large_orange_diamond: Action: Ctrl + Cで一旦プロセスを停止してください。
+# このプロセスは立ち上げたままにしてください。
 
 # 先程のエラーを解消するために、クライアント側で最初のGraphQLフラグメントを定義します。
+
+# :large_orange_diamond: Action: 以前に立ち上げた、別のターミナルに移動してください。
+
+# ![アートボード 5.png](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/75738/928b1a5f-84c8-e803-74b6-7386542a4f56.png)
 
 # :large_orange_diamond: Action: 以下のコマンドを入力してください。
 
 # ```terminal
-git apply
-319360d DivisionCard.tsx barebone to codegen type definitions
-# npm run client-generate
+# # gitレポジトリのルートディレクトリに移動
+# shellcheck disable=SC2164 # REMOVE THIS IN aggregate.sh
+cd "$(git rev-parse --show-toplevel)"
+git apply patches/29c4cb7.patch
 # ```
 
 # :white_check_mark: Result: `client/generated/graphql.ts` ファイルに型定義が自動生成されればOKです。
-
-# このプロセスは立ち上げたままにしてください。

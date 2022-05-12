@@ -5,15 +5,15 @@ cd ../ || exit               # REMOVE THIS IN aggregate.sh - cd to the git repos
 
 # ## 1. GraphQLサーバーのセットアップ
 
-# このチュートリアルでは以下の画像のように、4つのプロセスを立ち上げます。まずはGraphQLサーバープロセスを立ち上げていきましょう。
+# このチュートリアルでは以下の画像のように、4つのプロセス(上段)と、さらに1つのターミナル(下段)を立ち上げます。合計で5つと数は多いですが、使い分けは簡単なので心配しないでください。
 
-# ![アートボード 2.png](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/75738/6d1717b1-a470-89da-ef41-58670a898c23.png)
+# ![アートボード 1.png](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/75738/0b6ce57a-663d-3403-99ed-54683644fd7c.png)
 
 # まずは GraphQLサーバーをセットアップしていきましょう。
 
 # :large_orange_diamond: Action: 以下のコマンドを入力してください。
 
-# ```terminal: GraphQLサーバー
+# ```terminal
 git apply patches/201ea30.patch
 git apply patches/f482a1d.patch
 git apply patches/b979ec5.patch
