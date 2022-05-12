@@ -19,9 +19,10 @@ cd ../ || exit               # REMOVE THIS IN aggregate.sh - cd to the git repos
 # # gitレポジトリのルートディレクトリに移動
 # shellcheck disable=SC2164 # REMOVE THIS IN aggregate.sh
 cd "$(git rev-parse --show-toplevel)"
-git apply patches/2-server-codegen-install.patch
-git apply patches/2-server-codegen-yml.patch
-git apply patches/2-server-codegen-set-script.patch
+git apply patches/88b1ced.patch
+git apply patches/1f78fa0.patch
+git apply patches/af44310.patch
+git apply patches/6dea912.patch
 # shellcheck disable=SC2164 # REMOVE THIS IN aggregate.sh
 cd server
 npm install
