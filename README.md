@@ -30,22 +30,21 @@ cd tutorial-apollo-employee-division
 
 ## 1. GraphQLサーバーのセットアップ
 
-このチュートリアルでは以下の画像のように、4つのプロセスを立ち上げます。まずはGraphQLサーバープロセスを立ち上げていきましょう。
+このチュートリアルでは以下の画像のように、4つのプロセス(上段)と、さらに1つのターミナル(下段)を立ち上げます。合計で5つと数は多いですが、使い分けは簡単なので心配しないでください。
 
-![アートボード 2.png](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/75738/6d1717b1-a470-89da-ef41-58670a898c23.png)
+![アートボード 1.png](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/75738/0b6ce57a-663d-3403-99ed-54683644fd7c.png)
 
 まずは GraphQLサーバーをセットアップしていきましょう。
 
 :large_orange_diamond: Action: 以下のコマンドを入力してください。
 
-```terminal: GraphQLサーバー
-git apply 
-201ea30 add .gitignore
-f482a1d npm init -yes
-b979ec5 npm install apollo-server graphql
-425a387 npm install --save-dev ts-node-dev typescript
-5847c01 npx tsc -init
-ac56d80 server necessary files to start
+```terminal
+git apply patches/201ea30.patch
+git apply patches/f482a1d.patch
+git apply patches/b979ec5.patch
+git apply patches/425a387.patch
+git apply patches/5847c01.patch
+git apply patches/ac56d80.patch
 cd server
 npm install
 npm run server-start
@@ -84,20 +83,21 @@ npm run server-start
 
 codegenによりGraphQLスキーマファイル schema.graphql からTypeScriptの型を自動生成できます。自分で手を動かして型を書くと、面倒な上に間違いも起こりやすいので、codegenで型を自動生成しましょう。
 
-実際に自動生成される型定義を見ると、どの部分の型を自分で書かなくて良くなるか一目瞭然です。早速動かしていきましょう。
+実際に自動生成される型定義を見ると、これがどのくらい便利なのか一目瞭然です。早速動かしていきましょう。
 
 :large_orange_diamond: Action: 新しいターミナルを立ち上げてください。
 
-![アートボード 3.png](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/75738/31eac510-efac-6ac5-8376-8b95b8758e2c.png)
+![アートボード 2.png](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/75738/f070b897-1556-b705-d4af-d204b44fff70.png)
 
 :large_orange_diamond: Action: 以下のコマンドを入力してください。
 
-```terminal: サーバーcodegen
+```terminal:
 # gitレポジトリのルートディレクトリに移動
 cd "$(git rev-parse --show-toplevel)"
-git apply patches/2-server-codegen-install.patch
-git apply patches/2-server-codegen-yml.patch
-git apply patches/2-server-codegen-set-script.patch
+git apply patches/88b1ced.patch
+git apply patches/1f78fa0.patch
+git apply patches/af44310.patch
+git apply patches/1de3257.patch
 cd server
 npm install
 npm run server-generate
@@ -114,18 +114,17 @@ npm run server-generate
 
 :large_orange_diamond: Action: 新しいターミナルを開いてください。
 
-![アートボード 4.png](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/75738/a89cb30f-6c50-879c-737a-f601980a140d.png)
+![アートボード 3.png](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/75738/321bc58b-7bbe-988e-c51c-f2fe16f3ceb2.png)
 
 :large_orange_diamond: Action: 以下のコマンドを入力してください。
 
 ```terminal
 gitレポジトリのルートディレクトリに移動
 cd "$(git rev-parse --show-toplevel)"
-git apply 
-3cf13af create-react-app
-0fa66f2 npx prettier --write .
-5019eac npm install @apollo/client graphql
-9f32946 npm set-script client-start "react-scripts start"
+git apply patches/d569883.patch
+git apply patches/6186b50.patch
+git apply patches/bca253f.patch
+git apply patches/dcd6de3.patch
 cd client
 npm install
 npm run client-start
@@ -137,13 +136,19 @@ npm run client-start
 
 Reactロゴが大きく表示されているこの画面から、画面の表示をシンプルなものに差し替えましょう。そうすると、それ以降行うソースコード変更がわかりやすくなります。
 
+このプロセスは立ち上げたままにしてください。
+
+:large_orange_diamond: Action: 新しいターミナルを開いてください。
+
+![アートボード 5.png](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/75738/928b1a5f-84c8-e803-74b6-7386542a4f56.png)
+
 :large_orange_diamond: Action: 以下のコマンドを入力してください。
 
 ```terminal
-cd ../
-git apply
-4ce7a24 index.html and index.css updated
-d389589 simplify App.tsx
+gitレポジトリのルートディレクトリに移動
+cd "$(git rev-parse --show-toplevel)"
+git apply patches/d2baf20.patch
+git apply patches/c5201f0.patch
 ```
 
 :white_check_mark: Result: 以下のように表示されればOKです
@@ -155,8 +160,7 @@ d389589 simplify App.tsx
 :large_orange_diamond: Action: 以下のコマンドを入力してください。
 
 ```terminal
-git apply
-793c3bf Header Component
+git apply patches/f2f7d08.patch
 ```
 
 :white_check_mark: Result: 以下のように表示されればOKです
@@ -168,11 +172,8 @@ App.tsxにGraphQLを導入してみましょう。
 :large_orange_diamond: Action: 以下のコマンドを入力してください。
 
 ```terminal
-git apply
-793c3bf Header Component
+git apply patches/a1d6ca9.patch
 ```
-
-このプロセスは立ち上げたままにしてください。
 
 ここから先は、クライアント側でもGraphQLから自動生成されたTypeScript型定義を効かせてコーディングしていきます。そのために、codegenのセットアップを行いましょう。
 
@@ -183,20 +184,17 @@ git apply
 
 :large_orange_diamond: Action: 新しいターミナルを立ち上げてください。
 
-![アートボード 5.png](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/75738/29870265-68f3-2a32-7c89-d0b930f42aba.png)
+![アートボード 4.png](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/75738/6fbd7901-ca6b-ed1a-da43-26ebc7ce16cd.png)
 
 :large_orange_diamond: Action: 以下のコマンドを入力してください。
 
 ```terminal
 # gitレポジトリのルートディレクトリに移動
 cd "$(git rev-parse --show-toplevel)"
-git apply
-546870 npm install --save-dev @graphql-codegen/cli
-0a77aa2 npm install --save-dev @graphql-codegen/typescript @graphql-codegen/typescript-operations @graphql-codegen/typescript-react-apollo
-ff914c7 codegen.yml
-ff2266e npm set-script client-generate "graphql-codegen --config codegen.yml --watch src/**/*.tsx,../server/schema.gql"
-cd client
-npm install
+git apply patches/6dae1d9.patch
+git apply patches/0cdd81d.patch
+git apply patches/56bb5dc.patch
+git apply patches/db72e9f.patch
 ```
 
 GraphQLスキーマが `hello: String` というフィールドしかない、その場しのぎのものだったので、これを更新します。
@@ -204,9 +202,7 @@ GraphQLスキーマが `hello: String` というフィールドしかない、�
 :large_orange_diamond: Action: 以下のコマンドを入力してください。
 
 ```terminal
-cd ../
-git apply
-7bc6da2 server actual data 
+git apply patches/f28d1c1.patch
 ```
 
 この状態ではまだ、クライアント側codegenを実行するとエラーが発生します。それを以下で確かめましょう。
@@ -214,131 +210,130 @@ git apply
 :large_orange_diamond: Action: 以下のコマンドを入力してください。
 
 ```terminal
+cd client
+npm install
+npm run client-codegen 
 npm run client-generate
 ```
 
 :white_check_mark: Result: エラーが発生します。
 
 ```terminal
-ERROR!!!
+ Found 1 error
+#
+  ✖ src/generated/graphql.ts
+    Error: 
+          Unable to find any GraphQL type definitions for the following pointers:
+       
+              - src/**/*.tsx
 ```
-
-:large_orange_diamond: Action: Ctrl + Cで一旦プロセスを停止してください。
-
-先程のエラーを解消するために、クライアント側で最初のGraphQLフラグメントを定義します。
-
-:large_orange_diamond: Action: 以下のコマンドを入力してください。
-
-```terminal
-git apply
-319360d DivisionCard.tsx barebone to codegen type definitions
-npm run client-generate
-```
-
-:white_check_mark: Result: `client/generated/graphql.ts` ファイルに型定義が自動生成されればOKです。
 
 このプロセスは立ち上げたままにしてください。
 
+先程のエラーを解消するために、クライアント側で最初のGraphQLフラグメントを定義します。
 
-## 5. インクリメンタルな開発
+:large_orange_diamond: Action: 以前に立ち上げた、別のターミナルに移動してください。
 
-さあ、いよいよ…
-
-:large_orange_diamond: Action: 新しいターミナルを立ち上げてください。
-
-![アートボード 6.png](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/75738/83e08d04-4c90-31f8-e4fd-62accf7f6da4.png)
+![アートボード 5.png](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/75738/928b1a5f-84c8-e803-74b6-7386542a4f56.png)
 
 :large_orange_diamond: Action: 以下のコマンドを入力してください。
 
 ```terminal
 # gitレポジトリのルートディレクトリに移動
 cd "$(git rev-parse --show-toplevel)"
-git apply
-bd67a1f update DivisionCard.tsx to take generated DivisionCardFragment
+git apply patches/29c4cb7.patch
 ```
+
+:white_check_mark: Result: `client/generated/graphql.ts` ファイルに型定義が自動生成されればOKです。
+
+
+## 5. インクリメンタルな開発
+
+さあ、いよいよここからはReactクライアント画面の表示を次々に変化させていく、インクリメンタルな開発を行います。ソースコードの変更がすぐに画面の表示の変化となって表れるので、きっと手応えを感じていただけると思います。
+
+以前に立ち上げた、4つのプロセスとは別のターミナルを引き続き使います。
+
+![アートボード 5.png](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/75738/928b1a5f-84c8-e803-74b6-7386542a4f56.png)
 
 :large_orange_diamond: Action: 以下のコマンドを入力してください。
 
+まずはGraphQLサーバーから取得した部署の名前を表示しましょう。
+
 ```terminal
-git apply
-b7bd9c9 CompanyPage.tsx
+# gitレポジトリのルートディレクトリに移動
+cd "$(git rev-parse --show-toplevel)"
+git apply patches/fc58873.patch
+git apply patches/fc67eea.patch
 ```
 
 :white_check_mark: Result: 以下のように表示されればOKです
 
-![]()
+![image.png](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/75738/fa3b30cc-253c-3685-6187-a7c4275de021.png)
+
+次に、部署名の表示を日本語に変えます。
 
 :large_orange_diamond: Action: 以下のコマンドを入力してください。
 
 ```terminal
-git apply
-4bdffb8 Add divisionDisplayName
+git apply patches/8af8eb9.patch
 ```
 
 :white_check_mark: Result: 以下のように表示されればOKです
 
-![]()
+![image.png](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/75738/8f834abc-737e-4a34-15b0-bdbe1f91d34f.png)
 
 DivisionCardの見た目を整えていきましょう。
 
 :large_orange_diamond: Action: 以下のコマンドを入力してください。
 
 ```terminal
-git apply
-309b3b6 make DivisionCard as cards visually
+git apply patches/c40553d.patch
 ```
 
 :white_check_mark: Result: 以下のように表示されればOKです
 
-![]()
-
-:large_orange_diamond: Action: 以下のコマンドを入力してください。
-
-```terminal
-git apply
-0214b64 decorate DivisionCard title
-```
-
-:white_check_mark: Result: 以下のように表示されればOKです
-
-![2022-05-08_15h01_24.png](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/75738/cd36d93a-c0bb-39eb-5932-54a85bfe2401.png)
+![2022-05-08_15h01_24.png](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/75738/1f6fb19c-95a6-95e1-fc3d-33a602a30260.png)
 
 各部門に属する部署の数と人数を表示してみましょう。GraphQLにフィールド `numDepartments` と `numMembers` を追加します。
 
 :large_orange_diamond: Action: 以下のコマンドを入力してください。
 
 ```terminal
-git apply
-be7ec9c add numMembers and numDepartments
+git apply patches/a806910.patch
 ```
 
 :white_check_mark: Result: 以下のように表示されればOKです
 
-![2022-05-08_15h00_54.png](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/75738/c05f3746-9b25-2053-6a05-dc04f3220e3d.png)
+![2022-05-08_15h00_54.png](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/75738/1be85e13-4b3c-684f-56f5-1c903ed59ee3.png)
 
 各部門のカード右下に英語部門名も表示してみましょう。GraphQLにフィールド `divisionDisplayNameEn` を追加します。
 
 :large_orange_diamond: Action: 以下のコマンドを入力してください。
 
 ```terminal
-git apply
-00f6142 add English division names
+git apply patches/737806f.patch
 ```
 
 :white_check_mark: Result: 以下のように表示されればOKです
 
-![2022-05-08_15h19_35.png](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/75738/925aeeee-0ee8-6b6d-9d3c-b233e92dd808.png)
+![2022-05-08_15h19_35.png](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/75738/e74238b5-8f19-8be3-2ec7-df9608258e49.png)
 
-表示される部門の数を増やしてみましょう。そのためには、GraphQL Queryの`divisions`フィールドの戻り値の要素数を増やします。
+最後に、表示される部門の数を増やしてみましょう。そのためには、GraphQL Queryの`divisions`フィールドの戻り値の要素数を増やします。
 
 :large_orange_diamond: Action: 以下のコマンドを入力してください。
 
 ```terminal
-git apply
-78c545c (client-after-server) more divisions
+git apply patches/3f1bc4f.patch
 ```
 
 :white_check_mark: Result: 以下のように表示されればOKです
 
 ![2022-05-08_15h22_55.png](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/75738/9056966a-a0de-44cc-c0d8-224e610a3046.png)
 
+## 6. まとめ
+
+以上が 企業の社員録をイメージした、部門一覧ページを題材に React クライアントと GraphQL サーバーとの間で通信して構築するアプリケーションを紹介しました。。
+
+### 次のチュートリアル
+
+(作成中) 企業の社員録をイメージした、部門内の社員一覧ページ
